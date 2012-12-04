@@ -48,9 +48,10 @@
 
 		<hr>
 
-		<%= render @suggestions %>
-		
-		<%= link_to "More", suggestions_path %>
+		<% if @suggestions.count > 0 %>
+			<%= render @suggestions %>
+			<%= link_to "More", suggestions_path %>
+		<% end -%>
 
  	</aside>
 </div>

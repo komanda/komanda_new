@@ -1,7 +1,6 @@
 Komanda::Application.routes.draw do
   root :to => 'parties#index'
   
-  #match '/users' => 'static_pages#users'
   match '/stats' => 'static_pages#stats'
 
   match '/contact' => 'static_pages#contact'
