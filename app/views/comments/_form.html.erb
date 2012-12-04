@@ -1,0 +1,19 @@
+<div class="media">
+	<div class="pull-left">
+		<%= link_to image_tag(current_user.img_url, class: "img-rounded", size: "40x0"),
+			current_user.profile_url %>
+	</div>
+
+	<div class="media-body">
+		<%= form_for [object, Comment.new], remote: true do |f| %>
+
+			<%= f.text_area :content, rows: 2, class: "span5", placeholder: "Write a comment..." %>
+			<div id="error" class="text-error hide">Comment cannot be blank.</div>
+			<%= f.submit "Post", :class => 'btn btn-primary', id: "post_button", class: "hide" %>
+
+		<% end %>
+	</div>
+</div>
+
+	
+	

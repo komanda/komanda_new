@@ -1,0 +1,30 @@
+<% if @sidebar %>
+	<% @parties.each do |party| %>
+		$("#previous").append("<li class='scroll'><%= escape_javascript(render 'parties/sidebar_party', object: [party, @prev.id]) %></li>")
+	<% end %>
+	<% if @extra %>
+		var url = "/parties?sidebar=true&extra=<%= @extra %>&skip=<%= @skip %>&prev=<%= @prev.id %>"
+ 	<% else %>
+		var url = "/parties?sidebar=true&skip=<%= @skip %>&prev=<%= @prev.id %>"
+	<% end %> 	
+	$("#more").button("reset")
+	fix_scroll_top()
+<% else %>
+	$("#parties").append("<%= escape_javascript(render @previous) %>")
+	var url = "/parties?skip=<%= @skip %>"
+<% end %>
+
+<% if @done %>
+	$("#more").remove()
+<% else %>
+	$("#more").attr("href", url)
+	load_more_on_scroll()
+<% end %>
+
+
+
+
+
+
+	
+	

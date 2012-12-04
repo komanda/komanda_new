@@ -1,0 +1,36 @@
+
+<%= form_for @suggestion, :html => { :class => 'form-horizontal' }, remote: true do |f| %>				
+		<div id="suggestion_form_error" class="control-group hide">
+			<div class="controls">
+				<span class="text-error">At least one of the fields needs to be filled out.</span>
+		   </div>
+		</div>
+		
+		<div class="control-group">
+	    	<%= f.text_area :location, rows: 2, maxlength: 2000, placeholder: "Location..." %> 
+		</div>
+		
+		<div class="control-group">
+	    	<%= f.text_area :music, rows: 2, maxlength: 2000, placeholder: "Suggest music..." %> 
+		</div>
+		
+		<div class="control-group">
+	    	<%= f.text_area :games, rows: 2, maxlength: 2000, placeholder: "Suggest new games..." %> 
+		</div>
+		
+		<div class="control-group">
+	    	<%= f.text_area :food_drinks, rows: 2, maxlength: 2000, placeholder: "Suggest food and drinks..." %> 
+		</div>
+		
+		<div class="control-group">
+	    	<%= f.text_area :other, rows: 2, maxlength: 2000, placeholder: "Anything else you want to add?" %> 
+		</div>
+		
+		<div class="form-actions">
+		    <%= f.submit "Suggest", :class => 'btn btn-primary' %>
+		    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		                parties_path, :class => 'btn' %>
+		</div>
+<% end %>
+
+

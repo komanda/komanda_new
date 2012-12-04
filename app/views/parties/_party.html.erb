@@ -1,0 +1,34 @@
+<li class="party span2">
+
+	<article class="thumbnail">
+		<% if current_user && admin_user? %>
+			<div class="admin">
+		      <%= link_to "Edit", edit_party_path(party), :class => 'btn btn-mini' %>
+	          <%= link_to "Delete",
+	                      party_path(party),
+	                      :method => :delete,
+	                      :data => { :confirm => 'Are you sure?' },
+	                      :class => 'btn btn-mini btn-danger' %>
+			</div>	
+		<% end %>
+
+		<div class="flyer">
+			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-desktop", remote: true %>
+			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-phone" %>
+		</div>
+
+		<h4><%= link_to party.title, party %></h4>
+
+		<footer class="muted">
+			<%= link_to("#{party_path(party)}#pictures") do %>
+				<strong><small><%= pluralize(party.pics.count, "pic") %>
+			<% end %>
+			<span> | </span>
+			<%= link_to("#{party_path(party)}#comments") do %>
+				<%= pluralize(party.comments.count, "comment") %></small></strong>
+			<% end %>
+		</footer>
+
+	</article>
+
+</li>

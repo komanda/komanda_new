@@ -1,0 +1,24 @@
+<% if @prev %>
+	$("#content").html("")
+	$("#<%= @prev.id %>").removeClass("active")
+	$("#<%= @party.id %>").addClass("active")
+	$("#content").html("<%= escape_javascript(render 'party_full', object: @party) %>")
+	
+	var url = $("#more").attr("href")
+	if (url != null) {
+		$("#more").attr("href", url.substr(0, url.length - 24) + "<%= @party.id %>")
+	}
+	update_party_links("<%= @party.id %>")
+	window.history.pushState({ page: "" }, '<%= @party.title %>', '<%= @party.slugs.first %>')
+<% else %>
+	$("#_modal").html("")
+	$("#_modal").append("<%= escape_javascript(render 'modal') %>")
+	$("#party-modal").modal("show")
+<% end %>	
+
+add_rating_on_hover()
+fix_show_pictures_link()
+fix_comment_form()
+fix_pictures_modal()
+add_comments_loading_effect()
+add_pics_loading_effect()

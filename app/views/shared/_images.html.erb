@@ -1,0 +1,41 @@
+<% 
+if @party && @party.valid? && @party.pics.count > 0
+	pics = @party.pics
+else
+	pics = pictures
+end 
+%>
+
+<section id="picture-section">
+	<div class="container">
+		<div class="row">
+			<div id="picture-panel" class="offset1 span9">
+
+				<% for i in 0..pics.count - 1 %>
+					
+					<% if i < 14 %>
+						<%= link_to (image_tag pics[i], class: "img-polaroid"), "#picture-modal", 
+							"data-toggle" => "modal" %>
+					<% else %>
+						<%= link_to (image_tag pics[i], class: "hide"), "#picture-modal", 
+							"data-toggle" => "modal" %>
+					<% end -%>
+					
+				<% end -%>
+	
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="picture-modal" class="modal fade hide" data-keyboard="true">
+	
+	<div class="modal-body">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<p>Image <span id="index">1</span>/<span id="total"><%= pics.count %></span></p>
+		<%= image_tag "", class: "img-polaroid", id: "modal-picture", size: "790x525" %>
+				
+		<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
+  		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
+	</div>
+</div>

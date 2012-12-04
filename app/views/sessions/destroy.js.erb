@@ -1,0 +1,4 @@
+$('.form-horizontal').html("<%= escape_javascript(render 'shared/login') %>")
+$('.admin').remove()
+$('#signed_user').html("<%= escape_javascript(render 'shared/login') %>")
+$('.close').hide()

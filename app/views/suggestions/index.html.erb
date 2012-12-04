@@ -1,0 +1,101 @@
+<div class="row">
+	<div class="span7">
+		<div class="pull-right fb-like visible-desktop" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+		<p class="lead">
+			Have a great idea for a party but too busy to organize it all on your own? Suggest the party here and we just might 	make it a reality!
+		</p>
+
+		<p class="text-center">
+			<% if current_user %>
+				<% if @suggestions.count > 0 %>
+					<button class="btn btn-primary btn-large hidden-phone" data-target="#suggestion-modal" data-toggle="modal" 
+						data-keyboard="true">
+						Suggest an event
+					</button>
+
+					<%= link_to "Suggest an event", new_suggestion_path, class: "btn btn-primary btn-large visible-phone" %>
+				<% end -%>
+			<% else %>
+				<a class="btn btn-primary btn-large visible-phone" rel="popover" data-placement="bottom" 
+					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
+					data-original-title="Sign in with:">Suggest an event</a>
+				<a class="btn btn-primary btn-large hidden-phone" rel="popover" data-placement="bottom" 
+					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
+					data-original-title="Sign in with:">Suggest an event</a>
+			<% end -%>
+		</p>
+
+		<% if @suggestions.count == 0 %>	
+			<% if current_user %>
+				<%= render 'form' %>
+			<% end -%>
+		<% else %>
+
+			<div class="row">
+				<h4 class="span4">Suggestions (<span id="suggestion-count"><%= @suggestions.count %></span>)</h4>
+
+				<% if @suggestions.count > 2 %>
+					<div id="sort" class="sort dropdown visible-desktop pull-right">
+						<span id="sort-loading-msg" class="hide muted">loading... </span>
+						<a class="dropdown-toggle" id="sort" data-toggle="dropdown" href="#">Sort <b class="caret"></b></a>
+						<ul class="dropdown-menu" aria-labelledby="sort">
+							<li><%= link_to "Date", "#{suggestions_path}?sort=date", remote: true %></li>
+					    	<li><%= link_to "Votes", "#{suggestions_path}?sort=votes", remote: true %></li>
+					    	<li><%= link_to "Comments", "#{suggestions_path}?sort=comments", remote: true %></li>
+				        </ul>
+					</div>
+				<% end %>
+			</div>
+			
+						
+			<div id="suggestions">
+				<% if @suggestions.count > 0 %>
+					<%= render @suggestions %>
+				<% end %>
+			</div>
+					
+			<p id="more_link">
+				<% unless @done %>
+					<%= link_to "More", "/suggestions?skip=#{@skip}", id: "more", class: "more", 
+						"data-loading-text"=>"Loading...", remote: true %>
+				<% end %>
+			</p>
+		<% end -%>
+
+		<%= render "modal" %>
+	</div>
+
+	<aside class="span5 hidden-phone suggestions-sidebar aside suggestions-aside">
+		<% if @upcoming.count > 0 %>
+			<p class="lead muted">Upcoming events</p>
+			<ul class="thumbnails">
+				<% if @upcoming.count > 0 %>
+					<% @upcoming.each do |event| %>
+						<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
+					<% end -%>
+				<% end %>
+			</ul>
+			
+			<% if @upcoming.count > 3 %>
+				<%= link_to "More", root_path %>
+			<% end -%>
+
+			<hr class="bs-docs-separator">
+		<% end -%>
+
+		<% if @previous.count > 0 %>
+			<p class="lead muted">Previous events</p>
+			<ul class="thumbnails">
+				<% @previous.each do |event| %>
+					<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
+				<% end -%>
+			</ul>
+
+			<% if @previous.count > 3 %>
+				<%= link_to "More", root_path %>
+			<% end -%>
+
+			<hr class="bs-docs-separator">
+		<% end -%>
+	</aside>
+</div>

@@ -1,0 +1,37 @@
+<article id="<%= object[0].id %>" class="thumbnail <%= "active" unless object[0].id != object[1] %>">
+	<% if object[1] == "x" %>
+		<%= link_to(party_path(object[0])) do %>
+			<div class="flyer">
+				<%= image_tag(object[0].flyer) %>
+			</div>
+
+			<h5><%= object[0].title %></h5>
+
+			<footer>
+				<small class="">
+					<%= pluralize(object[0].pics.count, "pic") %> | <%= pluralize(object[0].comments.count, "comment") %>
+<!-- 					<i class="icon-picture"></i> <%= object[0].pics.count %>
+					<span class="muted">-</span>
+					<i class="icon-comment"></i> <%= object[0].comments.count %> -->
+				</small>
+			</footer>
+		<% end -%>
+	<% else %>
+		<%= link_to(party_path(object[0]) + "?prev=#{object[1]}", remote: true) do %>
+			<div class="flyer">
+				<%= image_tag(object[0].flyer) %>
+			</div>
+
+			<h5><%= object[0].title %></h5>
+
+			<footer>
+				<small class="">
+					<%= pluralize(object[0].pics.count, "pic") %> | <%= pluralize(object[0].comments.count, "comment") %>
+					<!-- <i class="icon-picture"></i> <%= object[0].pics.count %>
+					<span class="muted">-</span>
+					<i class="icon-comment"></i> <%= object[0].comments.count %> -->
+				</small>
+			</footer>	
+		<% end -%>
+	<% end -%>	
+</article>

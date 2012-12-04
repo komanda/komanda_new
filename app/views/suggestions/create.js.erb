@@ -1,0 +1,13 @@
+<% if @suggestion.errors.empty? %>
+	// $("#new_suggestion").fadeOut(100, function(){ $(this).remove();});
+	$('#suggestion_form_error').hide()
+	$('#suggestions').prepend("<%= escape_javascript(render @suggestion) %>")
+	$("#suggestion-count").text("<%= @count %>")
+	$('#suggestion-modal').modal('hide')
+	clean_up()
+	add_keydown_action("comment_content_<%= @suggestion.id %>", "post_button_<%= @suggestion.id %>")
+<% else %>
+	$('#suggestion_form_error').show()
+<% end %>	
+
+$("#suggestion-loading-msg").button('reset')

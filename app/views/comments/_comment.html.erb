@@ -1,0 +1,18 @@
+<article id="<%= object[1].id %>" class="media">
+	<% if current_user && admin_user? %>
+		<%= link_to "×", party_comment_path(object[0], object[1]), class: "close", method: :delete, remote: true %>
+	<% end %>
+
+	<%= link_to image_tag(object[1].user.img_url, 
+		size: "40x0", class: "img-rounded"), object[1].user.profile_url, class: "pull-left" %>
+
+	<div class="media-body">
+		<div class="media-heading">
+		<%= link_to object[1].user.name, object[1].user.profile_url %>
+		<small class="muted"><%= time_ago_in_words(object[1].created_at) %> ago</small>
+	</div>
+	<%= object[1].content %>
+	</div>
+</article>
+
+<!-- <div class="comment-separator"></div> -->

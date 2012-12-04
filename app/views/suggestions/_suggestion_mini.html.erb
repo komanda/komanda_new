@@ -1,0 +1,52 @@
+<article class="media">
+	<div class="pull-left">
+		<%= image_tag(object.user.img_url, size: "40x40", class: "img-rounded") %>
+	</div>
+
+	<div class="media-body">
+		<div class="media-header">
+			<%= link_to object.user.name, object.user.profile_url %>
+			<small class="muted"><%= time_ago_in_words(object.created_at) %></small>
+		</div>
+
+		<% if !object.location.nil? %>
+			<p>
+				<i class="icon-map-marker"></i> <strong>Location</strong> - <%= object.location %>
+			</p>
+		<% end %>
+
+		<% if !object.music.nil? %>
+			<p>
+				<i class="icon-music"></i> <strong>Music</strong> - <%= object.music %>
+			</p>
+		<% end %>
+
+		<% if !object.games.nil? %>
+			<p>
+				<i class="icon-star"></i> <strong>Games</strong> - <%= object.games %>
+			</p>
+		<% end %>
+
+		<% if !object.food_drinks.nil? %>
+			<p>
+				<i class="icon-glass"></i> <strong>Food/Drinks</strong> - <%= object.food_drinks %>
+			</p>
+		<% end %>
+
+		<% if !object.other.nil? %>
+			<p>
+				<i class="icon-list-alt"></i> <strong>Other</strong> - <%= object.other %>
+			</p>
+		<% end %>
+	</div>
+	<div class="separator">	
+			<%= image_tag "star.png", class: "star" %> 
+			<%= object.vote_counter %><span class="muted"> | </span><%= pluralize object.comment_counter, "comment" %>
+		</div>
+</article>
+
+
+
+
+
+

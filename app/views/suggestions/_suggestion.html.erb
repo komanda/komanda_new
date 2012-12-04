@@ -1,0 +1,127 @@
+<article id="<%= suggestion.id %>" class="media suggestion">
+	<% if current_user && admin_user? %>
+		<%= link_to "×", suggestion, class: "close", method: :delete, remote: true %>
+	<% end %>
+
+	<div  class="collapse-link" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
+		<div class="pull-left">
+			<%= image_tag(suggestion.user.img_url, size: "40x40", class: "img-rounded") %>
+		</div>
+
+		<div class="media-body">
+			<div class="media-header">
+				<%= link_to suggestion.user.name, suggestion.user.profile_url %>
+				<small class="muted"><%= time_ago_in_words(suggestion.created_at) %></small>
+			</div>
+
+			<% if !suggestion.location.nil? %>
+				<p>
+					<strong>Location</strong> - <%= suggestion.location %>
+				</p>
+			<% end %>
+
+			<% if !suggestion.music.nil? %>
+				<p>
+					<strong>Music</strong> - <%= suggestion.music %>
+				</p>
+			<% end %>
+
+			<% if !suggestion.games.nil? %>
+				<p>
+					<strong>Games</strong> - <%= suggestion.games %>
+				</p>
+			<% end %>
+
+			<% if !suggestion.food_drinks.nil? %>
+				<p>
+					<strong>Food/Drinks</strong> - <%= suggestion.food_drinks %>
+				</p>
+			<% end %>
+
+			<% if !suggestion.other.nil? %>
+				<p>
+					<strong>Other</strong> - <%= suggestion.other %>
+				</p>
+			<% end %>
+		</div>
+			
+	</div>
+
+	<div class="separator">
+			<span id="vote_link">
+				<% if current_user %>
+					<% if suggestion.votes.include?(current_user.id) %>
+						<%= link_to (image_tag "star.png", class: "star"),
+							"#{suggestions_unstar_path}?suggestion=#{suggestion.id}", remote: true %> 
+					<% else %>
+						<%= link_to (image_tag "star_empty.png", class: "star"), 
+							"#{suggestions_star_path}?suggestion=#{suggestion.id}", remote: true %> 
+					<% end -%>	
+				<% else %>
+					<a rel="popover" data-placement="right" 
+							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
+							data-original-title="Sign in to vote:"><%= image_tag "star.png", class: "star" %></a>
+				<% end -%>
+			</span>
+
+			<span id="vote_count_<%= suggestion.id %>"><%= suggestion.vote_counter %></span> 
+			| 
+			<a href="#" class="collapse-link gray" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
+			  Comments (<span id="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>)
+			</a>
+
+			<span class="pull-right hide test" id="<%= suggestion.id %>-load-comments">				
+				<% if suggestion.comments.count > 3 %>
+					<span id="<%= suggestion.id %>-loading-msg" class="muted" "data-loading-text"="loading..." >showing </span>
+					<% if suggestion.comments.count <= 50 %>
+						<%= link_to("/comments?suggestion_id=#{suggestion.id}",
+							remote: true,
+							class: "suggestion-comments",
+							id: "load_more_comments_#{suggestion.id}") do %>
+							<span id="stat_bar_<%= suggestion.id %>"> 
+							<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+							</span>        	
+						<% end -%>
+					<% else %>
+						<%= link_to("/comments?suggestion_id=#{suggestion.id}&skip=#{suggestion.comments.count - 50 - 3}",
+							remote: true,
+							class: "suggestion-comments",
+							id: "load_more_comments_#{suggestion.id}") do %>
+							<span id="stat_bar_<%= suggestion.id %>"> 
+							<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+							</span>
+						<% end -%>
+					<% end -%>
+				<% end -%>
+			</span>
+	</div>
+	
+	<div id="<%= suggestion.id %>-toggle" class="collapse">
+		<div id="dummy_<%= suggestion.id %>" class="comments"></div>
+
+		<div id="<%= suggestion.id %>_comments" class="comments">
+			<% if suggestion.comments.count > 0 %>
+				<% get_comments_for_suggestion(suggestion).each do |comment| %>
+					<%= render "comments/suggestion_comment", object: [suggestion, comment] %>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="form">
+			<% if current_user %>
+				<%= render 'comments/suggestion_comment_form', object: suggestion %>
+			<% else %>
+				<a rel="popover" data-placement="right" 
+							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
+							data-original-title="Sign in with:">Sign in</a> to leave a comment
+				
+			<% end %>
+		</div>
+	</div>
+</article>
+
+
+
+
+
+

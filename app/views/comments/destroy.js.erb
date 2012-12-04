@@ -1,0 +1,12 @@
+$("#<%= @comment.id %>").fadeOut(100, function(){ $(this).remove();});
+
+<% if @party %>
+	$('#comment_count').text("<%= @party.comments.count %>")
+	$('#comments_loaded').text(parseInt($('#comments_loaded').text()) - 1)
+	$('#total_comments').text("<%= @party.comments.count %>")
+<% else %>
+	$('#comment_count_<%= @suggestion.id %>').text("<%= @suggestion.comment_counter %>")
+	$('#showing_<%= @suggestion.id %>').text(parseInt($('#showing_<%= @suggestion.id %>').text()) - 1)
+	$('#comment_total_<%= @suggestion.id %>').text(parseInt($('#comment_total_<%= @suggestion.id %>').text()) - 1)
+<% end %>
+

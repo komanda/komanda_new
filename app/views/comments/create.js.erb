@@ -1,0 +1,36 @@
+<% if @spam %>
+
+<% else %>
+	<% if @comment.errors.empty? %>
+		<% if @party %>
+			$('#comments').append("<%= escape_javascript(render 'comments/comment', object: [@party, @comment]) %>")
+			$('#comment_count').text("<%= @party.comments.count %>")
+			$('#comments_loaded').text(parseInt($('#comments_loaded').text()) + 1)
+			$('#total_comments').text("<%= @party.comments.count %>")
+			$('#comment_content').attr("value", "")
+			$('#error').hide()
+		<% else %>
+			<% if @suggestion.comments.count == 1 %>
+				$('#dummy_<%= @suggestion.id %>').append("<%= escape_javascript(render 'comments/comment', object: [@suggestion, @comment]) %>")
+			<% else %>
+				$('#<%= @suggestion.id %>_comments').append("<%= escape_javascript(render 'comments/suggestion_comment', object: [@suggestion, @comment]) %>")
+			<% end %>
+			
+			$('#comment_count_<%= @suggestion.id %>').text("<%= @suggestion.comment_counter %>")
+
+			$('#showing_<%= @suggestion.id %>').text(parseInt($('#showing_<%= @suggestion.id %>').text()) + 1)
+			$('#comment_total_<%= @suggestion.id %>').text(parseInt($('#comment_total_<%= @suggestion.id %>').text()) + 1)
+		
+			$('#<%= @suggestion.id %> textarea').attr("value", "")
+			$('#error_<%= @suggestion.id %>').hide()
+		<% end %>
+	<% else %>
+		<% if @party %>
+			$('#error').show()
+			$('#comment_content').attr("value", "")
+		<% else %>
+			$('#error_<%= @suggestion.id %>').show()
+			$('#<%= @suggestion.id %> textarea').attr("value", "")
+			<% end %>
+	<% end %>
+<% end %>

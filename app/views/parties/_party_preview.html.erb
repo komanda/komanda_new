@@ -1,0 +1,36 @@
+<div class="party-preview">
+		<%= link_to (image_tag object.flyer, class: "img-polaroid span3 pull-left"), object %>
+
+		<!-- <div class="span4"> -->
+			<h3><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h3>
+			<hr class="bs-dosc-separator">
+			<p class="muted">
+				<% if current_user %>
+					<% if object.going.include?(current_user.id) %>
+						<button id="join_button_<%= object.id %>" class="btn btn-success disabled join-button">Going</button>
+					<% else %>
+						<%= link_to "Join", 
+							"#{parties_join_path}?party=#{object.id}", 
+							class: "btn btn-success join-button", id: "join_button_#{object.id}", remote: true %>
+					<% end -%>
+				<% else %>
+					<a id="join_button" class="btn btn-success join-button" rel="popover" data-placement="right" 
+							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
+							data-original-title="Sign in with:">Join</a>
+				<% end -%>
+				<span id="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> going
+			</p>
+			<hr class="bs-dosc-separator">
+			
+			<%= raw (truncate object.description, length: 400) %> <%= link_to "continue", object %>
+		<!-- </div> -->
+		<div class="pull-right">
+			<span>
+				<%= link_to("#{party_path(object)}#comments") do %>
+					<%= pluralize(object.comments.count, "Comment") %>
+				<% end -%>
+			</span>
+			<span class="label">Price: $<%= object.price %></span>
+			<span class="label label-important">Age: 21+</span>
+		</div>
+</div>

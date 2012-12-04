@@ -1,0 +1,15 @@
+<article id="<%= share.id %>" class="media">
+	
+	<% if current_user && admin_user? %>
+		<%= link_to "×", share, class: "close", method: :delete, remote: true %>
+	<% end %>
+
+	<div class="pull-left">
+		<%= link_to image_tag(share.user.img_url, class: "img-rounded", size: "50x40"), share.user.profile_url, class: "media-object" %>
+	</div>
+	<div class="media-body">
+		<p class="media-heading"><%= link_to share.user.name, share.user.profile_url %> 
+			<small class="muted"><%= time_ago_in_words(share.created_at) %></small></p>
+		<p><%= share.content %></p>
+	</div>
+</article>

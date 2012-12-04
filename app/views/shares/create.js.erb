@@ -1,0 +1,8 @@
+<% if @share.errors.empty? %>
+	$("#shares").prepend("<%= escape_javascript(render @share) %>")
+	$("#share_content").attr("value", "")
+	$("#error").hide()
+<% else %>
+	$("#share_content").attr("value", "")
+	$("#error").show()
+<% end %>

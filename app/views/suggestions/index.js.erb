@@ -1,0 +1,33 @@
+<% if @replace %>
+	$('#hidden_link').attr("href", "#")
+	$('#suggestions').html("<%= escape_javascript(render @suggestions) %>")
+<% else %>
+	$('#suggestions').append("<%= escape_javascript(render @suggestions) %>")
+<% end %>
+
+<% if @sort %>
+	var URI = "/suggestions?sort=<%= @sort %>&skip=<%= @skip %>"
+	$("#sort-loading-msg").hide()
+<% else %>
+	var URI = "/suggestions?skip=<%= @skip %>"
+<% end %>
+
+<% if @done %>
+	$("#more").remove()
+	// $("#more").attr("href", "")
+<% else %>
+	if ($("#more").show().length == 0) {
+		var more = $("<a id='more' class='hide' data-remote='true'>View more suggestions</a>")
+		$("#more_link").append(more)
+	}	
+	$("#more").attr("href", URI)
+	load_more_on_scroll()
+<% end %>
+
+fix_forms()
+fix_suggestion_comment_loading_effect()
+fix_collapse_links()
+
+
+
+

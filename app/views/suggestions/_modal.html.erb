@@ -1,0 +1,51 @@
+<div id="suggestion-modal" class="modal fade hide" data-keyboard="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Suggest new event</h3>
+	</div>
+	
+	<div class="modal-body">
+
+	<%= form_for @suggestion, :html => { :class => 'default' }, remote: true do |f| %>				
+			<div id="suggestion_form_error" class="control-group hide">
+				<span class="text-error">At least one of the fields needs to be filled out.</span>
+			</div>
+			
+			<div class="control-group">
+				<i class="icon-map-marker"></i> Location
+		    	<%= f.text_area :location, rows: 2, maxlength: 2000, placeholder: "Location...", class: "span5" %> 
+			</div>
+			
+			<div class="control-group">
+				<i class="icon-music"></i> Music
+		    	<%= f.text_area :music, rows: 2, maxlength: 2000, placeholder: "Music...", class: "span5" %> 
+			</div>
+			
+			<div class="control-group">
+				<i class="icon-star"></i> Games
+		    	<%= f.text_area :games, rows: 2, maxlength: 2000, placeholder: "Games...", class: "span5" %> 
+			</div>
+			
+			<div class="control-group">
+				<i class="icon-glass"></i> Food/Drinks
+		    	<%= f.text_area :food_drinks, rows: 2, maxlength: 2000, placeholder: "Food and drinks...", class: "span5" %> 
+			</div>
+			
+			<div class="control-group">
+				<i class="icon-list-alt"></i> Other
+		    	<%= f.text_area :other, rows: 2, maxlength: 2000, placeholder: "Other...", class: "span5" %> 
+			</div>
+			
+	</div>
+
+	<div class="modal-footer">
+		<%= f.submit "Post", 
+			class: 'btn btn-primary more', 
+			id: "suggestion-loading-msg",
+			"data-loading-text"=>"loading...", 
+			remote: true %>
+		<button class="btn" data-dismiss="modal"> Cancel</button>
+	</div>
+	<% end %>
+</div>

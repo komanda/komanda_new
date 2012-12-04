@@ -1,0 +1,27 @@
+<div class="main">
+	<h1><%= pluralize(@users.count, "User") %></h1>
+
+	<table class="table table-bordered table-hover">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Votes</th>
+				<th>Comments</th>
+				<th>Suggestions</th>
+				<th>Ratings</th>
+			</tr>
+			<% @users.each do |user| %>
+			<tr>
+				<td>
+					<%= link_to image_tag(user.img_url, class: "img-rounded", size: "50x40"), user.profile_url %>
+					<%= link_to user.name, user.profile_url %>
+				</td>
+				<td><%= user.votes.count %></td>
+				<td><%= user.comments.count %></td>
+				<td><%= user.suggestions.count %></td>
+				<td><%= user.ratings.count %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

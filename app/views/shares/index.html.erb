@@ -1,0 +1,18 @@
+<div class="hero-unit center">
+	<p>Here you can share an event with us!</p>
+</div>
+
+<% if current_user %>
+	<%= render 'form' %>
+<% end %>
+
+<div id="shares">
+	<% if @shares.count > 0 %>
+		<%= render @shares %>
+	<% end %>
+</div>
+
+<div>
+	<%= link_to "more", "/shares?skip=50", id: "more", class: "", remote: true %>
+</div>
+

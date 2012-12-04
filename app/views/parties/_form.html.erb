@@ -1,0 +1,68 @@
+<%= form_for @party, :html => { :class => 'form-horizontal' } do |f| %>
+ 
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field', style: "width: 485px" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :when, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :when, ampm: true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :flyer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :flyer, :class => 'text_field', rows: 2, style: "width: 485px" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_field', rows: 10, style: "width: 485px" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+      <%= f.label :address, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :address, :class => 'text_field', rows: 2, style: "width: 485px" %>
+      </div>
+  </div>
+  
+	<div class="control-group">
+      <%= f.label :map, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :map, :class => 'text_field', rows: 5, style: "width: 485px" %>
+      </div>
+    </div>
+  
+  	<div class="control-group">
+      <%= f.label :pics, :class => 'control-label' %>
+      <div class="controls">
+		<% if @party.pics.nil? %>
+	        <%= f.text_area :pics, :class => 'text_field', rows: 10, style: "width: 485px" %>
+		<% else %>
+			<%= f.text_area :pics, value: @party.pics.join(" "), :class => 'text_field', rows: 10, style: "width: 485px" %> 
+		<% end %>
+      </div>
+    </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                parties_path, :class => 'btn' %>
+  </div>
+<% end %>

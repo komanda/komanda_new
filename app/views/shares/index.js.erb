@@ -1,0 +1,9 @@
+$("#shares").append("<%= escape_javascript(render @shares) %>")
+
+<% if @done %>
+	$("#more").remove()
+<% else %>
+	URL = "/shares?skip=<%= @skip %>"
+	$("#more").attr("href", URL)
+	load_more_on_scroll()
+<% end %>

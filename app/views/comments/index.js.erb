@@ -1,0 +1,45 @@
+<% if @party %>
+	var loaded_comments = $("<div class='loaded_comments_<%= @party.id %>'></div>")
+	
+	<% @comments.each do |comment| %>
+		loaded_comments.append("<%= escape_javascript(render 'comments/comment', object: [@party, comment]) %>")
+	<% end %>
+	
+	$('#comments').prepend(loaded_comments)
+	$("#loading-msg").button("reset")
+
+	<% if @skip && @limit %>
+		$('#comments_loaded').text(parseInt($('#comments_loaded').text()) + 50)
+		$('#more_comments_link').attr("href", "/comments?party_id=<%= @party.id %>&limit=<%= @limit %>")
+	<% elsif @skip %>		
+		$('#comments_loaded').text(parseInt($('#comments_loaded').text()) + 50)
+		$('#more_comments_link').attr("href", "/comments?party_id=<%= @party.id %>&skip=<%= @skip %>")
+	<%# elsif @done %>
+		// $('#comments_loaded').text("<%= @party.comments.count %>")
+		// $('#more_comments_link').html("<span class='muted'><%=@party.comments.count %>/<%=@party.comments.count %></span>")
+	<% else %>
+		// $('#comments_loaded').text("<%= @party.comments.count %>")
+		// $('#more_comments_link').html("<span class='muted'><%=@party.comments.count %>/<%=@party.comments.count %></span>")
+		$('#more_comments').html("<span class='muted'>showing <%=@party.comments.count %>/<%=@party.comments.count %></span>")
+	<% end %>
+<% else %>
+	var loaded_comments = $("<div class='loaded_comments_<%= @suggestion.id %>' id='loaded_comments_<%= @suggestion.id %>'></div>")
+	
+	<% @comments.each do |comment| %>
+		loaded_comments.append("<%= escape_javascript(render 'comments/comment', object: [@suggestion, comment]) %>")
+	<% end %>
+	
+	$('#<%= @suggestion.id %>_comments').prepend(loaded_comments)
+	$("#<%= @suggestion.id %>-loading-msg").button('reset')
+	// $('#<%= @suggestion.id %> article:first').prepend(loaded_comments)
+	
+	<% if @skip && @limit %>
+		$('#showing_<%= @suggestion.id %>').text(parseInt($('#showing_<%= @suggestion.id %>').text()) + 50)
+		$('#load_more_comments_<%= @suggestion.id %>').attr("href", "/comments?suggestion_id=<%= @suggestion.id %>&limit=<%= @limit %>")
+	<% elsif @skip %>		
+		$('#showing_<%= @suggestion.id %>').text(parseInt($('#showing_<%= @suggestion.id %>').text()) + 50)
+		$('#load_more_comments_<%= @suggestion.id %>').attr("href", "/comments?suggestion_id=<%= @suggestion.id %>&skip=<%= @skip %>")
+	<% else %>
+		$("#<%= @suggestion.id %>-loading-msg").parent().html("<span class='muted'>showing <%= @suggestion.comments.count %>/<%= @suggestion.comments.count %></span>")
+	<% end %>
+<% end %>

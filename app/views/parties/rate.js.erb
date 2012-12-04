@@ -1,0 +1,4 @@
+$("#rating-count").text("<%= pluralize @party.ratings.count, 'rating' %>")
+$("#rate").attr("val", "<%= @party.get_rating %>")
+$("#user_rating").text("<%= pluralize(@rating, 'star') %>")
+$("#voted").show()

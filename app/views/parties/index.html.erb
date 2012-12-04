@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="span8">
+		<div class="pull-right fb-like visible-desktop" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+		<h2>Upcoming events</h2>
+
+		<% if current_user && admin_user? %>
+			<p><%= link_to "New event", new_party_path, class: "btn btn-primary btn-large" %></p>
+		<% end -%>
+
+		<% if @upcoming.count > 0 %>
+			<% @upcoming.each do |event| %>
+				<%= render 'party_preview', object: event %>
+			<% end -%>
+		<% else %>			
+			<div class="lead">
+				We are planning our next event.
+				Have a suggestion? <%= link_to "Let us know!", suggestions_path %> Or <%= link_to "share", shares_path %> an event your are going to!
+			</div>
+		<% end -%>
+
+		<h2>Previous events</h2>	
+
+		<ul id="parties" class="thumbnails">
+			<%= render @previous %>		
+		</ul>
+
+
+		<% if @previous.count >= 5 %>
+			<p><%= link_to "More", "/parties?skip=4", id: "more", class: "more", "data-loading-text"=>"Loading...", remote: true %></p>
+		<% end %>
+
+		<div id="_modal">
+		</div>
+	</div>
+
+	<aside class="span4 visible-desktop parties-sidebar aside">
+		<% if @upcoming.count > 0 %>
+			<p class="lead">
+				Have a great idea for a party but too busy to organize it all on your own? Suggest the party here and we just might make it a reality!
+			</p>
+
+			<p class="text-center">
+				<% if @suggestions.count > 0 %>
+					<%= link_to "Suggest an event", suggestions_path, class: "btn btn-primary btn-large" %>
+				<% end -%>
+			</p>
+		<% end -%>
+
+		<hr>
+
+		<%= render @suggestions %>
+		
+		<%= link_to "More", suggestions_path %>
+
+ 	</aside>
+</div>

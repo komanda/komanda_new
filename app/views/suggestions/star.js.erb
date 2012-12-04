@@ -1,0 +1,5 @@
+<% if @suggestion %>
+	$("#<%= @suggestion.id %> #vote_link a").attr("href", "/suggestions/unstar?suggestion=<%= @suggestion.id %>")
+	$("#<%= @suggestion.id %> #vote_link a img").attr("src", "/assets/star.png")
+	$('#vote_count_<%= @suggestion.id %>').text('<%= @suggestion.vote_counter %>')
+<% end %>

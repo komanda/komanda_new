@@ -1,0 +1,2 @@
+$("#join_button_<%= @party.id %>").addClass("disabled").text("Going").attr("href", "")
+$("#going_counter_<%= @party.id %>").text("<%= pluralize @party.going.count, 'person' %>")

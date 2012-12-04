@@ -1,0 +1,64 @@
+
+<% if current_user %>
+	<%= form_for @suggestion, html: { class: "default" } do |f| %>		
+			
+			<div id="suggestion_form_error" class="control-group hide">
+				<div class="controls">
+					<span class="text-error">At least one of the fields needs to be filled out.</span>
+			   </div>
+			</div>
+			
+			<div class="control-group">
+			    <%= f.label(:class => 'control-label') do %>
+			    	<i class="icon-map-marker"></i> Location
+			    <% end -%>
+			    <div class="controls">
+			    	<%= f.text_area :location, rows: 2, maxlength: 2000, class: "span6" %> 
+			    </div>
+			</div>
+			
+			<div class="control-group">
+			    <%= f.label(:class => 'control-label') do %>
+			    	<i class="icon-music"></i> Music
+			    <% end -%>
+			    <div class="controls">
+			    	<%= f.text_area :music, rows: 2, maxlength: 2000, class: "span6" %> 
+			    </div>
+			</div>
+			
+			<div class="control-group">
+			    <%= f.label(:class => 'control-label') do %>
+			    	<i class="icon-star"></i> Games
+			    <% end -%>
+			    <div class="controls">
+			    	<%= f.text_area :games, rows: 2, maxlength: 2000, class: "span6" %> 
+			    </div>
+			</div>
+			
+			<div class="control-group">
+			    <%= f.label(:class => 'control-label') do %>
+			    	<i class="icon-glass"></i> Food/Drinks
+			    <% end -%>
+			    <div class="controls">
+			    	<%= f.text_area :food_drinks, rows: 2, maxlength: 2000, class: "span6" %> 
+			    </div>
+			</div>
+			
+			<div class="control-group">
+			    <%= f.label(:class => 'control-label') do %>
+			    	<i class="icon-list-alt"></i> Other
+			    <% end -%>
+			    <div class="controls">
+			    	<%= f.text_area :other, rows: 2, maxlength: 2000, class: "span6" %> 
+			    </div>
+			</div>
+			
+		    <%= f.submit "Post", :class => 'btn btn-primary'%>
+		    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		                parties_path, :class => 'btn' %>
+	<% end %>
+<% else %>
+	<p>Sign in with <%= render 'shared/signin' %> to post a suggestion.</p>
+<% end -%>
+
+

@@ -1,0 +1,6 @@
+<% if @suggestion.nil? %>
+	alert("Something went wrong. Try reloading the page before voting again. <%= @test %>")
+<% else %>
+	$("#<%= @suggestion.id %> .well a img").attr("src", "/assets/star.png")
+	$('#vote_count_<%= @suggestion.id %>').text('<%= @suggestion.vote_counter %>')
+<% end %>

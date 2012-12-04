@@ -1,0 +1,54 @@
+<article class="row">
+	<article id="content" class="span8">
+		<%= render "parties/party_full", object: @party %>
+	</article>
+
+	<aside id="index" class="span4 visible-desktop sidebar aside">
+		<p class="lead">Have a great idea for a party but too busy to organize it all on your own? Suggest the party here and we just might make it a reality!
+		</p>
+		<p class="text-center">
+			<%= link_to "Suggest an event", suggestions_path, class: "btn btn-primary btn-large" %>
+		</p>
+
+		<hr class="bs-docs-separator">
+
+		<% if @upcoming.count > 0 %>
+			<p class="lead muted">Upcoming events</p>
+			<ul class="thumbnails" id="upcoming">
+				<% @upcoming.each do |party| %>
+					<li class="scroll"><%= render 'parties/sidebar_party', object: [party, @party.id] %></li>
+				<% end %>
+			</ul>	
+		<% end %>
+		
+		<% if @previous.count > 0 %>
+			<p class="lead muted">Previous events</p>
+			<ul class="thumbnails" id="previous">
+				<% @previous.each do |party| %>
+					<li class="scroll"><%= render 'parties/sidebar_party', object: [party, @party.id] %></li>
+				<% end %>
+			</ul>	
+		<% end %>
+		
+		<p>
+			<% if @extra %>
+				<%= link_to("#{parties_path}?sidebar=true&skip=5&extra=#{@extra}&prev=#{@party.id}", 
+					class: "more",
+					id: "more", 
+					"data-loading-text"=>"Loading...", 
+					remote: true) do %>
+					More
+				<% end -%>
+			<% else %>
+				<%= link_to("#{parties_path}?sidebar=true&skip=5&prev=#{@party.id}", 
+					class: "more", 
+					id: "more",
+					"data-loading-text"=>"Loading...",
+					remote: true) do %>
+					More
+				<% end -%>
+			<% end -%>
+		</p>
+	</aside>
+</article>
+
