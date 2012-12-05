@@ -65,12 +65,17 @@
 			</span>
 
 			<span id="vote_count_<%= suggestion.id %>"><%= suggestion.vote_counter %></span> 
-			| 
+			|
 			<a href="#" class="collapse-link gray" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
-			  Comments (<span id="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>)
+			  <span class="visible-phone">
+			  	<i class="icon-comment"></i> <span id="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+			  </span>
+			  <span class="hidden-phone">
+			  	Comments (<span id="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>)
+			  </span>
 			</a>
-
-			<span class="pull-right hide test" id="<%= suggestion.id %>-load-comments">				
+			
+			<span class="hide test pull-right" id="<%= suggestion.id %>-load-comments">				
 				<% if suggestion.comments.count > 3 %>
 					<span id="<%= suggestion.id %>-loading-msg" class="muted" "data-loading-text"="loading..." >showing </span>
 					<% if suggestion.comments.count <= 50 %>
