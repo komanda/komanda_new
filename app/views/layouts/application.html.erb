@@ -320,7 +320,7 @@
 		function fix_collapse_links() {
 			$(".collapse-link").click(function(e) {
 				e.preventDefault()
-				$(this).parent().find(".test").toggle() //.toggleClass("pull-right")
+				$(this).parent().find(".test").toggle().toggleClass("pull-right")
 			})
 		}
 
