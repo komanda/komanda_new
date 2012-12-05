@@ -63,6 +63,7 @@ Party.create(title: "Komanda Beach Party 1",
 	flyer: "http://imageshack.us/a/img11/3170/flyerzr.jpg",
 	address: "Venice Blvd, Half Moon Bay, California 94019",
 	price: 5,
+	going: Array(0..145),
 	pics: "http://imageshack.us/a/img717/8971/image7xd.jpg
 		http://imageshack.us/a/img24/6699/image6ymj.jpg
 		http://imageshack.us/a/img41/7332/image5es.jpg
@@ -110,6 +111,7 @@ Party.create(title: "Komanda Beach Party 2",
 	flyer: "http://img443.imageshack.us/img443/433/flyersu.jpg",
 	address: "Venice Blvd, Half Moon Bay, California 94019",
 	price: 10,
+	going: Array(0..156),
 	pics: "http://imageshack.us/a/img713/4359/49011445.jpg
 		http://imageshack.us/a/img9/1209/85032364.jpg
 		http://imageshack.us/a/img138/5994/43379652.jpg
@@ -226,6 +228,7 @@ Party.create(title: "Komanda Beach Party 3",
 	flyer: "http://img29.imageshack.us/img29/9263/flyerdo.jpg",
 	address: "Venice Blvd, Half Moon Bay, California 94019",
 	price: 15,
+	going: Array(0..403),
 	pics: "http://imageshack.us/a/img846/8936/i76.jpg
 		http://imageshack.us/a/img515/9306/i74m.jpg
 		http://imageshack.us/a/img213/9092/i73i.jpg
@@ -341,6 +344,7 @@ Party.create(title: "Komanda Beer fest",
 	flyer: "http://img213.imageshack.us/img213/4701/flyerem.jpg",
 	address: "Baylands Park in Sunnyvale",
 	price: 15,
+	going: Array(0..364),
 	pics: "http://imageshack.us/a/img855/2482/i63u.jpg
 		http://imageshack.us/a/img443/2959/i62a.jpg
 		http://imageshack.us/a/img197/245/i61x.jpg
