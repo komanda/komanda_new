@@ -87,12 +87,12 @@
 	<hr class="bs-dosc-separator">
 	
 	<% unless object.address.blank? %>
-		<p><i class="icon-map-marker"></i><strong> Address</strong></p>
-		<p><%= object.address %></p>
-	<% end -%>
+		<i class="icon-map-marker"></i>
+		<%= object.address %>
+		<hr>
+	<% end %>
 
-	<p><i class="icon-info-sign"></i><strong> Info</strong></p>
-	<%= raw object.description %>
+	<%= raw @party.description %>
 	<span class="label">Price: $<%= object.price %></span>
 	<span class="label label-important">Age: 21+</span>
 
@@ -113,39 +113,68 @@
 			<ul class="thumbnails" id="pictures">
 				<% if object.pics.count > 9 %>
 					<% for i in 0..8 %>
-						<li class="span2">
+						<li class="img-container">
 							<%= link_to image_tag(object.pics[i]),
 								"#picture-modal",
-								"data-toggle"=>"modal",
-								class: "thumbnail" %>
+								"data-toggle"=>"modal" %>
 						</li>
 					<% end -%>
 					
 					<% for i in 9..object.pics.count - 1 %>
-						<li class="span2 hide">
+						<li class="hide img-container">
 							<%= link_to image_tag(object.pics[i]),
 								"#picture-modal",
-								"data-toggle"=>"modal",
-								class: "thumbnail" %>
+								"data-toggle"=>"modal" %>
 						</li>
 					<% end -%>
 				<% else %>
 					<% object.pics.each do |pic| %>
-						<li class="span2">
+						<li class="img-container">
 							<%= link_to image_tag(pic),
 								"#picture-modal",
-								"data-toggle"=>"modal",
-								class: "thumbnail" %>
+								"data-toggle"=>"modal" %>
 						</li>
 
 					<% end -%>
 				<% end -%>
 			</ul>
+
+			<!-- <div id="pictures">
+				<% if object.pics.count > 9 %>
+					<% for i in 0..8 %>
+						<div class="img-container">
+							<%= link_to image_tag(object.pics[i]),
+								"#picture-modal",
+								"data-toggle"=>"modal",
+								class: "" %>
+						</div>
+					<% end -%>
+					
+					<% for i in 9..object.pics.count - 1 %>
+						<div class="img-container hide">
+							<%= link_to image_tag(object.pics[i]),
+								"#picture-modal",
+								"data-toggle"=>"modal",
+								class: "hide" %>
+						</div>
+					<% end -%>
+				<% else %>
+					<% object.pics.each do |pic| %>
+						<div class="img-container">
+							<%= link_to image_tag(pic),
+								"#picture-modal",
+								"data-toggle"=>"modal",
+								class: "" %>
+						</div>
+					<% end -%>
+				<% end -%>
+			</div> -->
+
 			<div id="picture-modal" class="modal hide hidden-phone" data-keyboard="true">	
 				<div class="modal-body">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<p>Image <span id="picture_index">1</span>/<span id="total"><%= object.pics.count %></span></p>
-					<%= image_tag object.pics.first, class: "img-rounded", id: "modal-picture" %>
+					<%= image_tag object.pics.first, id: "modal-picture" %>
 							
 					<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
 			  		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>

@@ -98,11 +98,11 @@
 			<hr class="bs-docs-separator">
 
 			<% unless @party.address.blank? %>
-				<p><i class="icon-map-marker"></i><strong> Address</strong></p>
-				<p><%= @party.address %></p>
+				<i class="icon-map-marker"></i>
+				<%= @party.address %>
+				<hr>
 			<% end %>
 
-			<p><i class="icon-info-sign"></i><strong> Info</strong></p>
 			<%= raw @party.description %>
 		</p>	
 

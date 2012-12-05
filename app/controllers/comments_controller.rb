@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   before_filter :admin_user, only: :destroy
   
   def create
-    unless spam?
-        
+    unless spam?   
       if params[:party_id]
         @party = Party.find(params[:party_id])
         @comment = @party.comments.create(params[:comment]) 
@@ -15,10 +14,10 @@ class CommentsController < ApplicationController
         @comment = @suggestion.comments.create(params[:comment])
         @comment.user_id = current_user.id
         @comment.save
-        @suggestion.inc(:comment_counter, 1)
+        @suggestion.update_attribute(:comment_counter, @suggestion.comments.count)
       end
     end
-    # redirect_to :back
+    
     respond_to do |format|
       format.js
     end
@@ -33,7 +32,7 @@ class CommentsController < ApplicationController
       @suggestion = Suggestion.find(params[:suggestion_id])
       @comment = @suggestion.comments.find(params[:id])
       @comment.destroy
-      @suggestion.inc(:comment_counter, -1)
+      @suggestion.update_attribute(:comment_counter, @suggestion.comments.count)
     end
 
     respond_to do |format|
