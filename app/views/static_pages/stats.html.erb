@@ -42,6 +42,7 @@
 				<tbody>
 					<tr>
 						<th>Name</th>
+						<th>Going</th>
 						<th>Rating</th>
 						<th>Comments</th>
 						<th>Views</th>
@@ -49,6 +50,7 @@
 					<% @events.each do |e| %>
 					<tr>
 						<td><%= link_to e.title, e %></td>
+						<td><%= e.going.count %></td>
 						<td><%= e.get_rating %></td>
 						<td><%= e.comments.count %></td>
 						<td><%= e.views %></td>

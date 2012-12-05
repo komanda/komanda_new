@@ -8,7 +8,6 @@ class Party
   field :description
   field :when, :type => DateTime
   field :flyer
-  field :description
   field :address
   field :map
   field :pics, type: Array, default: []

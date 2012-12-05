@@ -31,21 +31,23 @@
 		<% end %>
 		
 		<p>
-			<% if @extra %>
-				<%= link_to("#{parties_path}?sidebar=true&skip=5&extra=#{@extra}&prev=#{@party.id}", 
-					class: "more",
-					id: "more", 
-					"data-loading-text"=>"Loading...", 
-					remote: true) do %>
-					More
-				<% end -%>
-			<% else %>
-				<%= link_to("#{parties_path}?sidebar=true&skip=5&prev=#{@party.id}", 
-					class: "more", 
-					id: "more",
-					"data-loading-text"=>"Loading...",
-					remote: true) do %>
-					More
+			<% if @previous.count > 4 %>
+				<% if @extra %>
+					<%= link_to("#{parties_path}?sidebar=true&skip=5&extra=#{@extra}&prev=#{@party.id}", 
+						class: "more",
+						id: "more", 
+						"data-loading-text"=>"Loading...", 
+						remote: true) do %>
+						More
+					<% end -%>
+				<% else %>
+					<%= link_to("#{parties_path}?sidebar=true&skip=5&prev=#{@party.id}", 
+						class: "more", 
+						id: "more",
+						"data-loading-text"=>"Loading...",
+						remote: true) do %>
+						More
+					<% end -%>
 				<% end -%>
 			<% end -%>
 		</p>

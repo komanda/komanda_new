@@ -234,6 +234,7 @@
 		<% if params[:controller] == "parties" && params[:action] == "show" %>
 			add_rating_on_hover()
 			fix_show_pictures_link()
+
 		<% end -%>
 
 		function add_rating_on_hover() {
@@ -326,6 +327,7 @@
 		fix_scroll_top()
 		function fix_scroll_top() {
 			$(".scroll").click(function() {
+				$("#content").css("opacity", '0.3')
 				$('html, body').animate({scrollTop:0}, 'slow');	
 			})
 		}
