@@ -31,6 +31,9 @@
 							data-original-title="Warning">
 							K-stuff</a>
 					</li>
+					<% if current_user && admin_user? %>
+	        			<li><%= link_to "Stats", stats_path %></li>
+	        		<% end %>
 		        </ul>
 		    </div>
 		    <div class="visible-phone">
@@ -50,16 +53,21 @@
 							data-original-title="Warning!">
 							K-stuff</a>
 					</li>
-					<% if current_user && admin_user? %>
-						<li><%= link_to "Stats", stats_path %></li>
+					<% if current_user %>
+						<% if current_user admin_user? %>
+							<%= link_to 'Stats', stats_path %>
+						<% end -%>
+						<li><%= link_to "Sign out", signout_path %></li>
+					<% else %>
+						<li class="nav-header">Sign in</li>
+						<li><a href='/auth/twitter' class='auth_provider'>twitter</a></li>
+						<li><a href='/auth/facebook' class='auth_provider'>facebook</a></li>
+						<li><a href='/auth/google_oauth2' class='auth_provider'>google</a></li>
 					<% end -%>
 		        </ul>
 	       </div>
-		    <ul class="nav pull-right">
+		    <ul class="nav pull-right visible-desktop">
 	        	<% if current_user %>
-	        		<% if admin_user? %>
-	        			<li><%= link_to "Stats", stats_path %></li>
-	        		<% end %>
 		        	<li class="dropdown">
 						<a href="#" class="dropdwon-toggle" data-toggle="dropdown">
 							<%= image_tag(current_user.img_url, size: "20x20") %>
@@ -72,7 +80,7 @@
 						</ul>
 					</li>
 				<% else %>
-					<li>
+					<li class="dropdown">
 						<a href="#" class="dropdwon-toggle" data-toggle="dropdown">
 							Sign in
 							<b class="caret"></b>
