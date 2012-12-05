@@ -178,6 +178,15 @@
 			var intervalID = setInterval(show_next_image, 10)
 		}
 
+		close_modals_with_esc()
+
+		function close_modals_with_esc() {
+			$(this).keydown(function(e) {
+				if (e.keyCode == 27)
+					$(".modal-close").click()
+			})
+		}
+
 		// attach links to photos
 		fix_pictures_modal();
 
@@ -188,6 +197,16 @@
 			for (i = 0; i < items.length; i++) {
 				imgs[i] = $(items[i]).find("img").first().attr("src")
 			}
+
+			$(this).keydown(function(e) { 
+				if (e.keyCode == 37)
+					$("#prev-button").click()
+			});
+
+			$(this).keydown(function(e) { 
+				if (e.keyCode == 39)
+					$("#next-button").click()
+			});
 
 			for (var i=0; i < items.length; i++) {
 				$(items[i]).find("img").first().click(function() {
