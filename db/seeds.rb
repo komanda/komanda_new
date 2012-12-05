@@ -17,7 +17,8 @@ nik.save
 # Admin user
 komanda = User.new(provider: "google_oauth2", 
 	uid: "114204232522796391545", 
-	name: "Komanda", img_url: nil, 
+	name: "Komanda",
+	img_url: "star.png",
 	profile_url: "/contact")
 komanda.admin = true
 komanda.save
