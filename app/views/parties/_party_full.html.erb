@@ -145,7 +145,7 @@
 				<div class="modal-body">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<p>Image <span id="picture_index">1</span>/<span id="total"><%= object.pics.count %></span></p>
-					<%= image_tag "blah", class: "img-rounded", id: "modal-picture" %>
+					<%= image_tag object.pics.first, class: "img-rounded", id: "modal-picture" %>
 							
 					<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
 			  		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
