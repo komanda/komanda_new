@@ -24,7 +24,7 @@ class User
       user.provider = auth["provider"]
       user.uid      = auth["uid"]
       user.name     = auth["info"]["name"]
-      user.img_url  = auth["info"]["image"]
+      user.img_url  = auth["info"]["image"] || "notfound.png"
       
       if auth["provider"] == "twitter"
         user.profile_url =  auth["info"]["urls"]["Twitter"]
