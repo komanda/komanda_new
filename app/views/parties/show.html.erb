@@ -22,7 +22,7 @@
 		<% end %>
 		
 		<% if @previous.count > 0 %>
-			<p class="lead muted">Previous events</p>
+			<p class="lead muted">Past events</p>
 			<ul class="thumbnails" id="previous">
 				<% @previous.each do |party| %>
 					<li class="scroll"><%= render 'parties/sidebar_party', object: [party, @party.id] %></li>
