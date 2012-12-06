@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   end
 
   def stats
-  	@users = User.all.desc(:name)
+  	@users = User.all.desc(:created_at)
   	@events = Party.all.desc(:when)
   	@suggestions = Suggestion.all.desc(:created_at)
   end

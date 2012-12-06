@@ -3,7 +3,7 @@
 		<%= link_to "×", suggestion, class: "close", method: :delete, remote: true %>
 	<% end %>
 
-	<div  class="collapse-link" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
+	<div class="collapse-link" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
 		<div class="pull-left">
 			<%= image_tag(suggestion.user.img_url, size: "40x40", class: "img-rounded") %>
 		</div>

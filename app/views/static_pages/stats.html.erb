@@ -13,6 +13,7 @@
 				<tbody>
 					<tr>
 						<th>Name</th>
+						<th>Created</th>
 						<th>Votes</th>
 						<th>Comments</th>
 						<th>Suggestions</th>
@@ -25,6 +26,7 @@
 							<%= link_to image_tag(user.img_url, class: "img-rounded", size: "40x0"), user.profile_url %>
 							<%= link_to user.name, user.profile_url %>
 						</td>
+						<td><%= time_tag user.created_at, format: "%B %e, %l:%M %P" %></td>
 						<td><%= user.votes.count %></td>
 						<td><%= user.comments.count %></td>
 						<td><%= user.suggestions.count %></td>

@@ -327,7 +327,10 @@
 		fix_collapse_links()
 
 		function fix_collapse_links() {
+			console.log("inside fix_collapse_links()")
+
 			$(".collapse-link").click(function(e) {
+				console.log("preventDefault")
 				e.preventDefault()
 				$(this).parent().find(".test").toggle().toggleClass("pull-right")
 			})
