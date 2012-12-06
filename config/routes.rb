@@ -5,6 +5,7 @@ Komanda::Application.routes.draw do
   match '/contact' => 'static_pages#contact'
   
   match '/auth/:provider/callback' => 'sessions#create'
+  match '/auth/failure' => 'parties#index'
   match '/signout' => 'sessions#destroy', :as => :signout
   
   match '/shares' => 'shares#index'
