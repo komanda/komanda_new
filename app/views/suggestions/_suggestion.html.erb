@@ -66,10 +66,10 @@
 			|
 			<a href="#" class="collapse-link gray" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
 			  <span class="visible-phone">
-			  	<i class="icon-comment"></i> <span class="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+			  	<i class="icon-comment"></i> <span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>
 			  </span>
 			  <span class="hidden-phone">
-			  	Comments (<span class="comment_count_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>)
+			  	Comments (<span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>)
 			  </span>
 			</a>
 			
