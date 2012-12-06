@@ -16,12 +16,10 @@
 					<%= link_to "Suggest an event", new_suggestion_path, class: "btn btn-primary btn-large visible-phone" %>
 				<% end -%>
 			<% else %>
-				<a class="btn btn-primary btn-large visible-phone" rel="popover" data-placement="bottom" 
-					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-					data-original-title="Sign in with:">Suggest an event</a>
-				<a class="btn btn-primary btn-large hidden-phone" rel="popover" data-placement="bottom" 
-					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-					data-original-title="Sign in with:">Suggest an event</a>
+				<a rel="tooltip" data-placement="bottom" title="Sign in to suggest" 
+					class="btn btn-primary btn-large visible-phone disabled">Suggest an event</a>
+				<a rel="tooltip" data-placement="bottom" title="Sign in to suggest" 
+					class="btn btn-primary btn-large hidden-phone disabled">Suggest an event</a>
 			<% end -%>
 		</p>
 

@@ -44,13 +44,14 @@
 					<%= link_to "Suggest an event", suggestions_path, class: "btn btn-primary btn-large" %>
 				<% end -%>
 			</p>
+			<hr>
 		<% end -%>
 
-		<hr>
-
 		<% if @suggestions.count > 0 %>
+			<p class="lead muted">Popular suggestions</p>
 			<%= render @suggestions %>
 			<%= link_to "More", suggestions_path %>
+			<hr>
 		<% end -%>
 
  	</aside>

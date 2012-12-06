@@ -2,7 +2,6 @@ Komanda::Application.routes.draw do
   root :to => 'parties#index'
   
   match '/stats' => 'static_pages#stats'
-
   match '/contact' => 'static_pages#contact'
   
   match '/auth/:provider/callback' => 'sessions#create'

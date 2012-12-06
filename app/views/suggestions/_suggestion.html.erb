@@ -58,9 +58,7 @@
 							"#{suggestions_star_path}?suggestion=#{suggestion.id}", remote: true %> 
 					<% end -%>	
 				<% else %>
-					<a rel="popover" data-placement="right" 
-							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-							data-original-title="Sign in to vote:"><%= image_tag "star.png", class: "star" %></a>
+					<a rel="tooltip" data-placement="bottom" title="Sign in to vote"><%= image_tag "star.png", class: "star" %></a>
 				<% end -%>
 			</span>
 
@@ -116,10 +114,9 @@
 			<% if current_user %>
 				<%= render 'comments/suggestion_comment_form', object: suggestion %>
 			<% else %>
-				<a rel="popover" data-placement="right" 
-							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-							data-original-title="Sign in with:">Sign in</a> to leave a comment
-				
+				<p class="text-center">
+					Sign in with <%= render 'shared/signin' %> to leave a comment.
+				</p>
 			<% end %>
 		</div>
 	</div>

@@ -48,7 +48,7 @@
 		</p>
 
 	<% else %>
-		<div id="rate">
+		<div id="rate" rel="tooltip" data-placement="bottom" title="Sign in to rate">
 			<% for i in 1..@party.get_rating %>
 				<%= image_tag("star.png", size: "35x0") %>
 			<% end -%>
@@ -58,8 +58,7 @@
 			<% end -%> 
 		</div>
 		<p class="muted">
-			<span id="rating-count"><%= pluralize @party.ratings.count, "rating" %> | </span>
-			<a href="#signin">Sign in</a> to rate.
+			<span id="rating-count"><%= pluralize @party.ratings.count, "rating" %>
 		</p>
 	<% end -%>
 
@@ -77,9 +76,8 @@
 				<button id="join_button_<%= @party.id %>" class="btn btn-success disabled join-button">Join</button>
 			<% end -%>
 		<% else %>
-			<a id="join_button_<%= @party.id %>" class="btn btn-success join-button" rel="popover" data-placement="right" 
-					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-					data-original-title="Sign in with:">Join</a>
+			<a id="join_button_<%= @party.id %>" class="btn btn-success join-button disabled"
+				rel="tooltip" data-placement="bottom" title="Sign in to join">Join</a>
 		<% end -%>
 		<span id="going_counter_<%= @party.id %>"><%= pluralize object.going.count, "person" %></span> going
 	</p>
@@ -187,10 +185,7 @@
 		<% if current_user %>
 			<%= render 'comments/form', object: object %>
 		<% else %>
-			<a rel="popover" data-placement="right" 
-					data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-					data-original-title="Sign in with:">Sign in</a>
-			to leave a comment.
+			<div class="text-center">Sign in with <%= render 'shared/signin' %> to leave a comment.</div>
 		<% end %>
 	</div>
 </div>
