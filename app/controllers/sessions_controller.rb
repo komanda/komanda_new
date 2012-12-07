@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     @user = User.find_by(provider: auth["provider"], uid: auth["uid"]) || User.create_with_omniauth(auth)
-    @user.update_attribute(:img_url, auth["info"]["image"])
+    @user.update_attribute(:img_url, auth["info"]["image"]) unless (@user.name == "Komanda" && @user.admin)
     session[:user_id] = @user.id
     
     if request.env["HTTP_REFERER"]

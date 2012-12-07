@@ -104,6 +104,7 @@ class CommentsController < ApplicationController
           return true
         end
       end
+       
       return false
     end
 end
