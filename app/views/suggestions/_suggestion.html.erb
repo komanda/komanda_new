@@ -1,6 +1,11 @@
 <article id="<%= suggestion.id %>" class="media suggestion">
-	<% if current_user && admin_user? %>
-		<%= link_to "×", suggestion, class: "close", method: :delete, remote: true %>
+	<% if current_user && (current_user == suggestion.user || admin_user?) %>
+		<%= link_to "×", suggestion, 
+			class: "close", 
+			"rel"=>"tooltip",
+			"data-placement"=>"left",
+			"title"=>"Delete comment",
+			method: :delete, remote: true %>
 	<% end %>
 
 	<div class="collapse-link" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">

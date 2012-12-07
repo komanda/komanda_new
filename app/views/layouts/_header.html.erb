@@ -11,7 +11,6 @@
 	      <%= link_to(root_path, class: "brand") do %>
 	      	<%= image_tag "star.png" %><span class="red">komanda</span>
 	      <% end %>
-	      <% link_to image_tag("komanda_clean.png", size: "130x00"), root_path, class: "brand" %>
 	 
 	      <div class="nav-collapse collapse">
 	      	<div class="offset4 visible-desktop">
@@ -56,7 +55,7 @@
 	        	<% if current_user %>
 		        	<li class="dropdown">
 						<a href="#" class="dropdwon-toggle" data-toggle="dropdown">
-							<%= image_tag(current_user.img_url, size: "20x20") %>
+							<%= image_tag(current_user.img_url || "star_empty.png", size: "20x20") %>
 							<%= current_user.name %>
 							<b class="caret"></b>
 						</a>

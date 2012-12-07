@@ -23,8 +23,8 @@ class User
     create! do |user|
       user.provider = auth["provider"]
       user.uid      = auth["uid"]
-      user.name     = auth["info"]["name"]
-      user.img_url  = auth["info"]["image"] || "notfound.png"
+      user.name     = auth["info"]["name"] || "Anonymous"
+      user.img_url  = auth["info"]["image"] || "star_empty.png"
       
       if auth["provider"] == "twitter"
         user.profile_url =  auth["info"]["urls"]["Twitter"]

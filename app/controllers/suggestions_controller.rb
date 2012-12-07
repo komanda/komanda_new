@@ -1,6 +1,5 @@
 class SuggestionsController < ApplicationController
-
-  before_filter :admin_user, only: [:destroy]
+  # before_filter :admin_user, only: [:destroy]
   before_filter :logged_in, only: [:star, :unstar, :create]
   
   def index
@@ -70,8 +69,12 @@ class SuggestionsController < ApplicationController
 
   def destroy
     @suggestion = Suggestion.find(params[:id])    
-    @suggestion.destroy unless @suggestion.nil?
-    @count = Suggestion.count
+    if @suggestion && authenticated_user(@suggestion)
+      @suggestion.destroy
+      @count = Suggestion.count
+    else
+      redirect_to root_url
+    end
     
     respond_to do |format|
       format.js
@@ -108,16 +111,15 @@ class SuggestionsController < ApplicationController
 
   private
       
-      def spam?
-         time = Time.now
-
-         count = current_user.suggestions.count
-         if count >= 2
-            if time - current_user.suggestions[count - 2].created_at < 3.seconds
-               return true
-            end
-         end
-         
-         return false
+    def spam?
+      if current_user.suggestions.count > 0
+        return (Time.now - current_user.suggestions.last.created_at) <= 1 ? true : false
+      else
+        return false
       end
+    end
+
+    def authenticated_user(suggestion)
+      return current_user.suggestions.include?(suggestion) || current_user.admin
+    end
 end

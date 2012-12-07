@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
-  before_filter :admin_user, only: :destroy
+  # before_filter :admin_user, only: :destroy
+  before_filter :logged_in, only: :create
+
   
   def create
     unless spam?   
@@ -27,12 +29,20 @@ class CommentsController < ApplicationController
     if (params[:party_id])
       @party = Party.find(params[:party_id])
       @comment = @party.comments.find(params[:id])
-      @comment.destroy
+      if authenticated_user(@comment)
+        @comment.destroy
+      else
+        redirect_to root_url
+      end
     else
       @suggestion = Suggestion.find(params[:suggestion_id])
       @comment = @suggestion.comments.find(params[:id])
-      @comment.destroy
-      @suggestion.update_attribute(:comment_counter, @suggestion.comments.count)
+      if authenticated_user(@comment)
+        @comment.destroy
+        @suggestion.update_attribute(:comment_counter, @suggestion.comments.count)
+      else
+        redirect_to root_url
+      end
     end
 
     respond_to do |format|
@@ -96,15 +106,14 @@ class CommentsController < ApplicationController
   
   private
     def spam?
-      time = Time.now
-      
-      count = current_user.comments.count
-      if count >= 2
-        if time - current_user.comments[count - 2].created_at < 3.seconds
-          return true
-        end
+      if current_user.comments.count > 0
+        return (Time.now - current_user.comments.last.created_at) <= 1 ? true : false
+      else
+        return false
       end
-       
-      return false
+    end
+
+    def authenticated_user(comment)
+      return current_user.comments.include?(comment) || current_user.admin
     end
 end

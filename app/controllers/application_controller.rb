@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
     def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end  
@@ -29,21 +28,5 @@ class ApplicationController < ActionController::Base
     
     def admin_user?
       current_user.admin
-    end
-
-    def pictures
-      get_pictures
-    end
-
-    def get_pictures
-      @pictures = []
-
-      Party.all.each do |party|
-        party.pics.each do |picture|
-          @pictures << picture
-        end
-      end
-
-      return @pictures
     end
 end
