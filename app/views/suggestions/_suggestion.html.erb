@@ -55,55 +55,56 @@
 	<!-- </div> -->
 
 	<div class="separator">
-			<span id="vote_link">
-				<% if current_user %>
-					<% if suggestion.votes.include?(current_user.id) %>
-						<%= link_to (image_tag "star.png", class: "star"),
-							"#{suggestions_unstar_path}?suggestion=#{suggestion.id}", remote: true %> 
-					<% else %>
-						<%= link_to (image_tag "star_empty.png", class: "star"), 
-							"#{suggestions_star_path}?suggestion=#{suggestion.id}", remote: true %> 
-					<% end -%>	
+		<span id="vote_link">
+			<% if current_user %>
+				<% if suggestion.votes.include?(current_user.id) %>
+					<%= link_to (image_tag "star.png", class: "star"),
+						"#{suggestions_unstar_path}?suggestion=#{suggestion.id}", remote: true %> 
 				<% else %>
-					<a rel="tooltip" data-placement="bottom" title="Sign in to vote"><%= image_tag "star.png", class: "star" %></a>
-				<% end -%>
-			</span>
+					<%= link_to (image_tag "star_empty.png", class: "star"), 
+						"#{suggestions_star_path}?suggestion=#{suggestion.id}", remote: true %> 
+				<% end -%>	
+			<% else %>
+				<a rel="tooltip" data-placement="bottom" title="Sign in to vote"><%= image_tag "star.png", class: "star" %></a>
+			<% end -%>
+		</span>
 
-			<span id="vote_count_<%= suggestion.id %>"><%= suggestion.vote_counter %></span> 
-			|
-			<a href="#" class="collapse-link gray" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
-			  <span class="visible-phone">
-			  	<i class="icon-comment"></i> <span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>
-			  </span>
-			  <span class="hidden-phone">
-			  	Comments (<span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>)
-			  </span>
-			</a>
-			
-			<span class="hide test" id="<%= suggestion.id %>-load-comments">				
-				<% if suggestion.comments.count > 3 %>
-					<span id="<%= suggestion.id %>-loading-msg" class="muted" "data-loading-text"="loading..." >showing </span>
-					<% if suggestion.comments.count <= 50 %>
-						<%= link_to("/comments?suggestion_id=#{suggestion.id}",
-							remote: true,
-							class: "suggestion-comments",
-							id: "load_more_comments_#{suggestion.id}") do %>
-							<span id="stat_bar_<%= suggestion.id %>"> 
-							<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
-							</span>        	
-						<% end -%>
-					<% else %>
-						<%= link_to("/comments?suggestion_id=#{suggestion.id}&skip=#{suggestion.comments.count - 50 - 3}",
-							remote: true,
-							class: "suggestion-comments",
-							id: "load_more_comments_#{suggestion.id}") do %>
-							<span id="stat_bar_<%= suggestion.id %>"> 
-							<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
-							</span>
-						<% end -%>
+		<span id="vote_count_<%= suggestion.id %>"><%= suggestion.vote_counter %></span> 
+		|
+		<a href="#" class="collapse-link gray" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
+		  <span class="visible-phone">
+		  	<i class="icon-comment"></i> <span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>
+		  </span>
+		  <span class="hidden-phone">
+		  	Comments (<span class="comment_count_<%= suggestion.id %>"><%= suggestion.comments.count %></span>)
+		  </span>
+		</a>
+		
+		<span class="hide pull-right test" id="<%= suggestion.id %>-load-comments">				
+			<% if suggestion.comments.count > 3 %>
+				<span id="<%= suggestion.id %>-loading-msg" class="muted" "data-loading-text"="loading..." >showing </span>
+				<% if suggestion.comments.count <= 50 %>
+					<%= link_to("/comments?suggestion_id=#{suggestion.id}",
+						remote: true,
+						class: "suggestion-comments",
+						id: "load_more_comments_#{suggestion.id}") do %>
+						<span id="stat_bar_<%= suggestion.id %>"> 
+						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+						</span>        	
+					<% end -%>
+				<% else %>
+					<%= link_to("/comments?suggestion_id=#{suggestion.id}&skip=#{suggestion.comments.count - 50 - 3}",
+						remote: true,
+						class: "suggestion-comments",
+						id: "load_more_comments_#{suggestion.id}") do %>
+						<!-- <span id="stat_bar_<%= suggestion.id %>">  -->
+						<!-- <span class="stat-bar"> -->
+						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+						<!-- </span> -->
 					<% end -%>
 				<% end -%>
-			</span>
+			<% end -%>
+		</span>
 	</div>
 	
 	<div id="<%= suggestion.id %>-toggle" class="collapse">
