@@ -42,6 +42,14 @@
 					    	<li><%= link_to "Comments", "#{suggestions_path}?sort=comments", remote: true %></li>
 				        </ul>
 					</div>
+					<div class="visible-phone" style="margin-bottom: 10px;">
+						<span class="muted">order by: </span>
+						<span id="sort-buttons" class="btn-group" rel="tooltip" title="Sort by">
+							<%= link_to "Date", "#{suggestions_path}?sort=date", class: "btn active", remote: true %>
+							<%= link_to "Votes", "#{suggestions_path}?sort=votes", class: "btn", remote: true %>
+							<%= link_to "Comments", "#{suggestions_path}?sort=comments", class: "btn", remote: true %>
+						</span>
+					</div>
 				<% end %>
 			</div>
 			

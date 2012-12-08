@@ -14,7 +14,6 @@
 
 <% if @done %>
 	$("#more").remove()
-	// $("#more").attr("href", "")
 <% else %>
 	if ($("#more").show().length == 0) {
 		var more = $("<a id='more' class='hide' data-remote='true'>View more suggestions</a>")
@@ -24,9 +23,10 @@
 	load_more_on_scroll()
 <% end %>
 
-fix_collapse_links()
+fix_collapse_links("<%= @suggestions.first.id %>")
 fix_forms()
 fix_suggestion_comment_loading_effect()
+$("#suggestions").css("opacity", "1")
 
 
 

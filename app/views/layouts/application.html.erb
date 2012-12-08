@@ -13,10 +13,6 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    
   </head>
   <body>
   	<%= render 'layouts/header' %>
@@ -86,8 +82,14 @@
 		fix_sort()
 
 		function fix_sort() {
+			$("#sort-buttons").children().click(function() {
+				$("#sort-buttons").children().removeClass("active")
+				$(this).addClass("active")
+				$("#suggestions").css("opacity", "0.5")
+			})
 			$("#sort li").click(function() {
 				$("#sort-loading-msg").show()
+				$("#suggestions").css("opacity", "0.5")
 			})
 		}
 
@@ -326,15 +328,83 @@
 
 		fix_collapse_links()
 
-		function fix_collapse_links() {
-			console.log("inside fix_collapse_links()")
+		function fix_collapse_links(id) {
+			if (id) {
+				var suggestions = $("#" + id).nextAll()
+				$("#" + id + " .collapse-link").click(function(e) {
+					e.preventDefault()
+					$(this).parent().find(".test").toggle().toggleClass("pull-right")
+				})
+				$("#" + id + " .collapse-div").click(function(e) {
+					$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+				})
+				for (var i = 0; i < suggestions.length; i++) {
+					$(suggestions[i]).click(function(e) {
+						e.preventDefault()
+						$(this).find(".test").toggle().toggleClass("pull-right")
+					})
+					$(suggestions[i]).find(".collapse-div").click(function(e) {
+						$(this).parent().find(".test").toggle().toggleClass("pull-right")
+					})
+				}
+			} else {
+				$(".collapse-link").click(function(e) {
+					e.preventDefault()
+					$(this).parent().find(".test").toggle().toggleClass("pull-right")
+				})
 
-			$(".collapse-link").click(function(e) {
-				console.log("preventDefault")
-				e.preventDefault()
-				$(this).parent().find(".test").toggle().toggleClass("pull-right")
-			})
+				$(".collapse-div").click(function(e) {
+					$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+				})
+			}
 		}
+
+		// function fix_collapse_links(id) {
+		// 	if (id) {
+		// 		var suggestions = $("#" + id).nextAll()
+		// 		$("#" + id + " .collapse-link").click(function(e) {
+		// 			e.preventDefault()
+		// 			$(this).parent().find(".test").toggle().toggleClass("pull-right")
+		// 		})
+		// 		for (var i = 0; i < suggestions.length; i++) {
+		// 			$(suggestions[i]).click(function(e) {
+		// 				e.preventDefault()
+		// 				$(this).find(".test").toggle().toggleClass("pull-right")
+		// 			})	
+		// 		}
+		// 	} else {
+		// 		$(".collapse-link").click(function(e) {
+		// 			e.preventDefault()
+		// 			$(this).parent().find(".test").toggle().toggleClass("pull-right")
+		// 		})
+		// 	}
+		// }
+
+		// fix_collapse_div()
+
+		// function fix_collapse_div(id) {
+		// 	if (id) {
+		// 		var suggestions = $("#" + id).nextAll()
+		// 		$("#" + id + " .collapse-div").click(function(e) {
+		// 			console.log("article-id:" + $(this).parent().parent().attr("id"))
+		// 			console.log("article-id:" + $(this).parent().parent().find(".test").html())
+		// 			$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+		// 		})
+		// 		for (var i = 0; i < suggestions.length; i++) {
+		// 			$(suggestions[i]).find(".collapse-div").click(function(e) {
+		// 				console.log("article-id:" + $(this).parent().parent().attr("id"))
+		// 				console.log("article-id:" + $(this).parent().parent().find(".test").html())
+		// 				$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+		// 			})	
+		// 		}
+		// 	} else {
+		// 		$(".collapse-div").click(function(e) {
+		// 			console.log("article-id:" + $(this).parent().parent().attr("id"))
+		// 			console.log("article-id:" + $(this).parent().parent().find(".test").html())
+		// 			$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+		// 		})
+		// 	}
+		// }
 
 		fix_scroll_top()
 		function fix_scroll_top() {
