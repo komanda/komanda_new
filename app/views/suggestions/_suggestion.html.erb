@@ -80,7 +80,7 @@
 		  </span>
 		</a>
 		
-		<span class="hide pull-right test" id="<%= suggestion.id %>-load-comments">				
+		<span class="hide test" id="<%= suggestion.id %>-load-comments">				
 			<% if suggestion.comments.count > 3 %>
 				<span id="<%= suggestion.id %>-loading-msg" class="muted" "data-loading-text"="loading..." >showing </span>
 				<% if suggestion.comments.count <= 50 %>

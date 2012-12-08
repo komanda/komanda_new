@@ -16,18 +16,15 @@
 	$("#more").remove()
 <% else %>
 	if ($("#more").show().length == 0) {
-		var more = $("<a id='more' class='hide' data-remote='true'>View more suggestions</a>")
+		var more = $("<a id='more' class='more' data-loading-text='Loading' data-remote='true'>More</a>")
 		$("#more_link").append(more)
 	}	
 	$("#more").attr("href", URI)
 	load_more_on_scroll()
 <% end %>
 
-fix_collapse_links()
+fix_collapse_links("<%= @suggestions.first.id %>")
 fix_forms()
 fix_suggestion_comment_loading_effect()
 $("#suggestions").css("opacity", "1")
-
-
-
 

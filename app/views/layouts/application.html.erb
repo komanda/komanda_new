@@ -328,16 +328,36 @@
 
 		fix_collapse_links()
 
-		function fix_collapse_links() {
-			$(".collapse-link").click(function(e) {
-				e.preventDefault()
-			})
+		function fix_collapse_links(id) {
+			if (id) {
+				$("#" + id).find(".collapse-link").click(function(e) {
+					e.preventDefault()
+					$(this).next().toggle().toggleClass("pull-right")
+				})
+				$("#" + id).find(".collapse-div").click(function() {
+					$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+				})
 
-			$(".suggestion-comments").click(function() {
-				if ($(this).parent().parent().parent().find(".in").length == 0) {
-					$(this).parent().parent().find(".collapse-link").click()
+				var suggestions = $("#" + id).siblings()
+				for (var i = 0; i < suggestions.length; i++) {
+					$(suggestions[i]).find(".collapse-link").click(function(e) {
+						e.preventDefault()
+						$(this).next().toggle().toggleClass("pull-right")
+					})
+					$(suggestions[i]).find(".collapse-div").click(function() {
+						$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+					})
 				}
-			})
+			} else {
+				$(".collapse-link").click(function(e) {
+					e.preventDefault()
+					$(this).next().toggle().toggleClass("pull-right")
+				})
+
+				$(".collapse-div").click(function() {
+					$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
+				})
+			}
 		}
 
 		fix_scroll_top()
