@@ -2,14 +2,14 @@
 
 	<article class="thumbnail">
 		<% if current_user && admin_user? %>
-			<div class="admin">
+			<!-- <div class="admin visible-desktop">
 		      <%= link_to "Edit", edit_party_path(party), :class => 'btn btn-mini' %>
 	          <%= link_to "Delete",
 	                      party_path(party),
 	                      :method => :delete,
 	                      :data => { :confirm => 'Are you sure?' },
 	                      :class => 'btn btn-mini btn-danger' %>
-			</div>	
+			</div>	 -->
 		<% end %>
 
 		<div class="flyer">
