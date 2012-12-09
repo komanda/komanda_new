@@ -9,7 +9,7 @@ class Party
   field :when, :type => DateTime
   field :flyer
   field :address
-  #field :map
+  field :map
   field :pics, type: Array, default: []
   field :views, default: 0
   field :price, type: Float, default: 15.00
