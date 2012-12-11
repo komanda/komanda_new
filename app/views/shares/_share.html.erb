@@ -1,5 +1,5 @@
 <article id="<%= share.id %>" class="media default">
-	<% if authenticated_user?(share) %>
+	<% if current_user && authenticated_user?(share) %>
 		<%= link_to "×", share, 
 			class: "close", 
 			"rel"=>"tooltip",
