@@ -1,15 +1,38 @@
-<article class="media">
-	<div class="pull-left">
-		<%= link_to (image_tag current_user.img_url, class: "img-rounded", size: "50x40"), 
-			current_user.profile_url %>
-	</div>
-	<div class="media-body">
-		<%= form_for @share, remote: true do |f| %>
-			<%= f.text_area :content, rows: 2, class: "span6", placeholder: "Share an event..." %>
-			<div class="text-error hide" id="error">
-				Cannot be blank.
-			</div>
-			<%= f.submit "Post", :class => 'btn btn-primary', id: "post_button", class: "hide" %>
+<div class="default">
+	<div id="errors">
+		<% if @share.errors.any? %>
+			<% @share.errors.full_messages.each do |error| %>
+				<p class="text-error"><%= error %></p>
+			<% end -%>
 		<% end %>
 	</div>
-</article>
+
+	
+	<%= form_for @share do |f| %>
+		
+		<div class="control-group">
+			<%= f.label "Date/time", class: "control-label" %>
+			<div class = "controls">
+				<%= f.text_field :date, class: "date-picker" %> 
+				<%#= f.time_select :time, ampm: true, minute_step: 15 %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label "URL", class: "control-label" %>
+			<div class = "controls">
+				<%= f.text_field :url, class: "span6" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label "Description", class: "control-label" %>
+			<div class = "controls">
+				<%= f.text_area :content, rows: 2, class: "span6" %>
+			</div>
+		</div>
+
+		<%= f.submit "Share", :class => 'btn btn-primary' %>
+		<%= link_to "Cancel", shares_path, class: "btn" %>
+	<% end %>	
+</div>

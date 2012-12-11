@@ -13,6 +13,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+
   </head>
   <body>
   	<%= render 'layouts/header' %>
@@ -325,6 +326,14 @@
 				$(this).siblings().button("loading")
 			})
 		}
+		
+		fix_share_loading_effect()
+		
+		function fix_share_loading_effect() {
+			$("#share-button").click(function() {
+				$(this).button("loading")
+			})
+		}
 
 		fix_collapse_links()
 
@@ -366,6 +375,12 @@
 				$("#content").css("opacity", '0.3')
 				$('html, body').animate({scrollTop:0}, 'slow');	
 			})
+		}
+		
+		/* Add date picker */
+		add_datepicker()
+		function add_datepicker() {
+			$(".date-picker").datepicker({ dateFormat: "yy-mm-dd", minDate: new Date(), maxDate: "+1y" })
 		}
 	</script>
   </body>

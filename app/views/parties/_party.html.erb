@@ -1,17 +1,6 @@
 <li class="party span2">
 
 	<article class="thumbnail">
-		<% if current_user && admin_user? %>
-			<!-- <div class="admin visible-desktop">
-		      <%= link_to "Edit", edit_party_path(party), :class => 'btn btn-mini' %>
-	          <%= link_to "Delete",
-	                      party_path(party),
-	                      :method => :delete,
-	                      :data => { :confirm => 'Are you sure?' },
-	                      :class => 'btn btn-mini btn-danger' %>
-			</div>	 -->
-		<% end %>
-
 		<div class="flyer">
 			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-desktop", remote: true %>
 			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-phone" %>

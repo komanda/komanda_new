@@ -1,0 +1,45 @@
+<div id="share-modal" class="modal fade hide">
+
+	<div class="modal-header">
+		<button type="button" class="close modal-close" 
+			data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Share an event</h3>
+	</div>
+	
+	<div class="modal-body">
+		<div id="errors">
+
+		</div>
+
+		<%= form_for @share, remote: true do |f| %>
+			
+			<div class="control-group">
+				<%= f.label "Date/time", class: "control-label" %>
+				<div class = "controls">
+					<%= f.text_field :date, class: "date-picker" %> 
+					<%#= f.time_select :time, ampm: true, minute_step: 15 %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label "URL", class: "control-label" %>
+				<div class = "controls">
+					<%= f.text_field :url, class: "span6" %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<%= f.label "Description", class: "control-label" %>
+				<div class = "controls">
+					<%= f.text_area :content, rows: 2, class: "span6" %>
+				</div>
+			</div>
+	</div>
+	
+	<div class="modal-footer">
+		<%= f.submit "Share", :class => 'btn btn-primary',
+		 	id: "share-button", "data-loading-text"=>"Sending" %>
+		<button class="btn" data-dismiss="modal">Cancel</button>
+	</div>
+	<% end %>
+</div>

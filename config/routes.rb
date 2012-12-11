@@ -8,16 +8,16 @@ Komanda::Application.routes.draw do
   match '/auth/failure' => 'parties#index'
   match '/signout' => 'sessions#destroy', :as => :signout
   
-  match '/shares' => 'shares#index'
-
   match '/parties/rate', :controller => 'parties', :action => 'rate'
   match '/parties/join', :controller => 'parties', :action => 'join'
   match '/parties/unjoin', :controller => 'parties', :action => 'unjoin'
 
   match '/suggestions/star', :controller => 'suggestions', :action => 'star'
   match '/suggestions/unstar', :controller => 'suggestions', :action => 'unstar'
-
+  
   resources :shares
+  match '/shares' => 'shares#index'
+  
   resources :comments
 
   resources :parties do

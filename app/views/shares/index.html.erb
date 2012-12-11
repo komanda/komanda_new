@@ -1,18 +1,43 @@
-<div class="hero-unit center">
-	<p>Here you can share an event with us!</p>
-</div>
+<div class="row">	
+	<div class="span7">
+		
+		<p class="lead">
+			Share an event with us!
+		</p>
+		
+		<p class="text-center">
+			<% if current_user %>
+				<% if @shares.count > 0 %>
+					<button class="btn btn-primary btn-large hidden-phone" 
+						data-target="#share-modal" data-toggle="modal">
+						Share an event
+					</button>
 
-<% if current_user %>
-	<%= render 'form' %>
-<% end %>
-
-<div id="shares">
-	<% if @shares.count > 0 %>
-		<%= render @shares %>
-	<% end %>
-</div>
-
-<div>
-	<%= link_to "more", "/shares?skip=50", id: "more", class: "", remote: true %>
+					<%= link_to "Share an event", new_share_path, 
+						class: "btn btn-primary btn-large visible-phone" %>
+					
+					<%= render 'modal' %>
+				<% else %>
+					<%= render 'form' %>
+				<% end -%>
+			<% else %>
+				<a rel="tooltip" data-placement="bottom" title="Sign in to share" 
+					class="btn btn-primary btn-large visible-phone disabled">Share an event</a>
+				<a rel="tooltip" data-placement="bottom" title="Sign in to share" 
+					class="btn btn-primary btn-large hidden-phone disabled">Share an event</a>
+			<% end -%>
+		</p>
+		
+		<h4>Shares (<span id="shares-count"><%= @shares.count %></span>)</h4>
+		<div id="shares">
+			<% if @shares.count > 0 %>
+				<%= render @shares %>
+			<% end %>
+		</div>	
+	</div>
+	
+	<aside class="span5">
+	</aside>
+	
 </div>
 

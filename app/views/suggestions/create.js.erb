@@ -1,5 +1,4 @@
 <% if @suggestion.errors.empty? %>
-	// $("#new_suggestion").fadeOut(100, function(){ $(this).remove();});
 	$('#suggestion_form_error').hide()
 	$('#suggestions').prepend("<%= escape_javascript(render @suggestion) %>")
 	$("#suggestion-count").text("<%= @count %>")

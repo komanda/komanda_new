@@ -15,17 +15,21 @@
 	      <div class="nav-collapse collapse">
 	      	<div class="offset4 visible-desktop">
 		        <ul class="nav">
-		        	<li class="first <%= "_active" unless !parties_controller? %>"><%= link_to "Events", parties_path  %></li>
-					<li class="<%= "_active" unless !suggestions_controller? %>"><%= link_to "Suggestions", suggestions_path  %></li>
-					<li>
-						<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">Share</a>
-					</li>
-					<li>
-						<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">K-stuff</a>
-					</li>
-					<% if current_user && admin_user? %>
-	        			<li><%= link_to "Stats", stats_path %></li>
-	        		<% end %>
+		        	<li class="first <%= "_active" unless !parties_controller? %>">
+								<%= link_to "Events", parties_path  %>
+							</li>
+							<li class="<%= "_active" unless !suggestions_controller? %>">
+								<%= link_to "Suggestions", suggestions_path  %>
+							</li>
+							<li class="<%= "_active" unless !shares_controller? %>">
+								<%= link_to "Shares", shares_path  %>
+							</li>
+							<li>
+								<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">K-stuff</a>
+							</li>
+							<% if current_user && admin_user? %>
+			        			<li><%= link_to "Stats", stats_path %></li>
+			        		<% end %>
 		        </ul>
 		    </div>
 		    <div class="visible-phone">

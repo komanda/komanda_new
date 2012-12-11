@@ -1,15 +1,29 @@
-<article id="<%= share.id %>" class="media">
+<article id="<%= share.id %>" class="media default">
+	<% if authenticated_user?(share) %>
+		<%= link_to "×", share, 
+			class: "close", 
+			"rel"=>"tooltip",
+			"data-placement"=>"left",
+			"title"=>"Delete",
+			method: :delete, remote: true %>
+	<% end -%>
 	
-	<% if current_user && admin_user? %>
-		<%= link_to "×", share, class: "close", method: :delete, remote: true %>
-	<% end %>
-
-	<div class="pull-left">
-		<%= link_to image_tag(share.user.img_url, class: "img-rounded", size: "50x40"), share.user.profile_url, class: "media-object" %>
-	</div>
+	<%= link_to (image_tag share.user.img_url, size: "40x40"), 
+		share.user.profile_url, class: "pull-left" %>
 	<div class="media-body">
-		<p class="media-heading"><%= link_to share.user.name, share.user.profile_url %> 
-			<small class="muted"><%= time_ago_in_words(share.created_at) %></small></p>
-		<p><%= share.content %></p>
+		<div class="media-header">
+			<%= link_to share.user.name, share.user.profile_url %>
+		</div>
+		
+		<p class="muted"><%= time_tag share.date, format: "%B %e" %></p>
+		
+		<% unless share.content.blank? %>
+				<p><%= share.content %></p>
+		<% end %>
+		
+		<% unless share.url.blank? %>
+			<p><a href="<%= share.url %>"><%= share.url %></a></p>
+		<% end %>
 	</div>
 </article>
+

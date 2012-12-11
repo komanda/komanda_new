@@ -1,55 +1,50 @@
 class SharesController < ApplicationController
-   before_filter :admin_user, only: :destroy
+  helper_method :authenticated_user?
+  before_filter :logged_in, only: [:new, :create]
+  
+  def index
+    @share = Share.new
+    @shares = Share.all.desc(:created_at)
+  end
 
-   def index
-      share_limit = 50
+  def new
+    @share = Share.new
+  end
 
-      @share = Share.new      
-      @skip = params[:skip].nil? ? 0 : params[:skip].to_i
-
-      @shares = Share.all.desc(:created_at).skip(@skip).limit(share_limit)
-
-      @skip += share_limit
-      @done = @skip >= Share.count ? true : false
-
-      respond_to do |format|
-         format.html
-         format.js
+  def create 
+    @share = current_user.shares.new(params[:share])
+    respond_to do |format|
+      if @share.save
+        format.html { redirect_to shares_path }
+      else
+        format.html { render 'new' }
       end
-   end
+      @count = Share.count
+      format.js
+    end
+  end
 
-   def create
+  def destroy
+    @share = Share.find(params[:id])
+    if authenticated_user?(@share)
+      @share.destroy
+      @count = Share.count
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
 
-      unless spam?   
-         @share = current_user.shares.create(params[:share])
-
-         respond_to do |format|
-            format.js
-         end
+  private
+    def spam?
+      if current_user.shares.count > 0
+        return (Time.now - current_user.shares.last.created_at) <= 1 ? true : false
+      else
+        return false
       end
-   end
-
-   def destroy
-      @share = Share.find(params[:id])
-      @share.destroy unless @share.nil?
-
-      respond_to do |format|
-         format.js
-      end
-   end
-
-   private
-      
-      def spam?
-         time = Time.now
-
-         count = current_user.shares.count
-         if count >= 2
-            if time - current_user.shares[count - 2].created_at < 3.seconds
-               return true
-            end
-         end
-         
-         return false
-      end
+    end
+    
+    def authenticated_user?(share)
+      return current_user.shares.include?(share) || current_user.admin
+    end
 end
