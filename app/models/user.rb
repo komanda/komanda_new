@@ -9,7 +9,6 @@ class User
   field :email, default: nil
   field :admin, default: false
   field :votes, type: Array, default: []
-  field :shares, type: Array, default: []
   field :ratings, type: Hash, default: {}
   
   index({ provider: 1, uid: 1}, { unique: true })

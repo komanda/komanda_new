@@ -15,7 +15,9 @@
 			<%= link_to share.user.name, share.user.profile_url %>
 		</div>
 		
-		<p class="muted"><%= time_tag share.date, format: "%B %e" %></p>
+		<p class="muted">
+			<%= time_tag share.date, format: "%B %e" %> at <%= time_tag share.time, format: "%l:%M %P" %>
+		</p>
 		
 		<% unless share.content.blank? %>
 				<p><%= share.content %></p>

@@ -29,6 +29,8 @@ class SharesController < ApplicationController
     if authenticated_user?(@share)
       @share.destroy
       @count = Share.count
+    else 
+      redirect_to root_path
     end
     respond_to do |format|
       format.js

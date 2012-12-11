@@ -1,9 +1,11 @@
 class Share
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::MultiParameterAttributes
   include ActionView::Helpers::SanitizeHelper
   
   field :date, type: Date
+  field :time, type: Time
   field :url
   field :content
   
