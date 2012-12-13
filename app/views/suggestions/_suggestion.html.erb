@@ -138,7 +138,8 @@
 						id: "load_more_comments_#{suggestion.id}") do %>
 						<!-- <span id="stat_bar_<%= suggestion.id %>">  -->
 						<!-- <span class="stat-bar"> -->
-						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>">
+							<%= suggestion.comments.count %></span>
 						<!-- </span> -->
 					<% end -%>
 				<% end -%>

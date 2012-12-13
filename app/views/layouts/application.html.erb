@@ -347,7 +347,7 @@
 					$(this).parent().parent().find(".test").toggle().toggleClass("pull-right")
 				})
 
-				var suggestions = $("#" + id).siblings()
+				var suggestions = $("#" + id).nextAll()
 				for (var i = 0; i < suggestions.length; i++) {
 					$(suggestions[i]).find(".collapse-link").click(function(e) {
 						e.preventDefault()
