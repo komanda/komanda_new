@@ -14,7 +14,7 @@
 							class: "btn btn-success join-button", id: "join_button_#{object.id}", remote: true %>
 					<% end -%>
 				<% else %>
-					<a href="#" class="btn btn-success disabled" rel="tooltip" title="Sign in to join">Join</a>
+					<a href="#" class="btn btn-success disabled join-button" rel="tooltip" title="Sign in to join">Join</a>
 				<% end -%>
 				<span id="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> going
 			</p>
