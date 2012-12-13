@@ -20,6 +20,7 @@
 			</div>
 
 			<div class="collapse-div" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
+				<!--
 				<% if !suggestion.location.nil? %>
 					<p>
 						<strong>Location</strong> - <%= suggestion.location %>
@@ -49,6 +50,44 @@
 						<strong>Other</strong> - <%= suggestion.other %>
 					</p>
 				<% end %>
+				-->
+				<table>
+					<% unless suggestion.location.nil? %>
+						<tr>
+							<td class="icon"><i class="icon-map-marker"></td>
+							<td class="content"><%= suggestion.location %></td>
+						</tr>
+					<% end %>
+					
+					<% unless suggestion.music.nil? %>
+						<tr>
+							<td class="icon"><i class="icon-music"></td>
+							<td class="content"><%= suggestion.music %></td>
+						</tr>
+					<% end %>
+					
+					<% unless suggestion.games.nil? %>
+						<tr>
+							<td class="icon"><i class="icon-star"></td>
+							<td class="content"><%= suggestion.games %></td>
+						</tr>
+					<% end %>
+					
+					<% unless suggestion.food_drinks.nil? %>
+						<tr>
+							<td class="icon"><i class="icon-glass"></td>
+							<td class="content"><%= suggestion.food_drinks %></td>
+						</tr>
+					<% end %>
+					
+					<% unless suggestion.other.nil? %>
+						<tr>
+							<td class="icon"><i class="icon-map-marker"></td>
+							<td class="content"><%= suggestion.other %></td>
+						</tr>
+					<% end %>
+					
+				</table>
 			</div>
 		</div>
 			

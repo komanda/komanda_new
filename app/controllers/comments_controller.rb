@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  # before_filter :admin_user, only: :destroy
   before_filter :logged_in, only: :create
 
   
@@ -111,9 +110,5 @@ class CommentsController < ApplicationController
       else
         return false
       end
-    end
-
-    def authenticated_user(comment)
-      return current_user.comments.include?(comment) || current_user.admin
     end
 end

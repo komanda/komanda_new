@@ -1,7 +1,7 @@
 <div class="row">	
 	<div class="span7">
 		
-		<p class="lead">
+		<p class="lead text-center">
 			Share an event with us!
 		</p>
 		
@@ -28,15 +28,65 @@
 			<% end -%>
 		</p>
 		
-		<h4>Shares (<span id="shares-count"><%= @shares.count %></span>)</h4>
-		<div id="shares">
-			<% if @shares.count > 0 %>
-				<%= render @shares %>
-			<% end %>
-		</div>	
+		<% if @shares.count > 0 %>
+			<h4>Shares (<span id="shares-count"><%= @shares.count %></span>)</h4>
+			<div id="shares">
+				<% if @shares.count > 0 %>
+					<%= render @shares %>
+				<% end %>
+			</div>
+			
+			<% if @shares.count > 10 %>
+				<%= link_to "More", 
+					"#{shares_path}?skip=10", 
+					"data-loading-text"=>"Loading",
+					class: "more",
+					id: "more", 
+					remote: true %>
+			<% end %>	
+		<% end %>	
 	</div>
 	
-	<aside class="span5">
+	<aside class="span5 hidden-phone suggestions-sidebar aside suggestions-aside">
+		<% if @upcoming.count > 0 %>
+			<p class="lead muted">Upcoming events</p>
+			<ul class="thumbnails">
+				<% if @upcoming.count > 0 %>
+					<% @upcoming.each do |event| %>
+						<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
+					<% end -%>
+				<% end %>
+			</ul>
+			
+			<% if @upcoming.count > 3 %>
+				<%= link_to "More", root_path %>
+			<% end -%>
+
+			<hr>
+		<% end -%>
+
+		<% if @previous.count > 0 %>
+			<p class="lead muted">Past events</p>
+			<ul class="thumbnails">
+				<% @previous.each do |event| %>
+					<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
+				<% end -%>
+			</ul>
+
+			<% if @previous.count > 3 %>
+				<%= link_to "More", root_path %>
+			<% end -%>
+
+			<hr>
+		<% end -%>
+		
+		<% if @suggestions.count > 0 %>
+			<p class="lead muted">Popular suggestions</p>
+			<%= render @suggestions %>
+			<%= link_to "More", suggestions_path %>
+			
+			<hr>
+		<% end -%>
 	</aside>
 	
 </div>

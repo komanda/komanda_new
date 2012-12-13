@@ -27,7 +27,8 @@ class PartiesController < ApplicationController
     else  
       @previous = Party.where(:when.lt => @today).desc(:when).limit(4)
       @upcoming = Party.where(:when.gt => @today).desc(:when)
-      @suggestions = Suggestion.skip(@skip).limit(3).order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc)
+      @suggestions = Suggestion.order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc).limit(3)
+      @shares = Share.desc(:date).limit(3)
     end
 
     respond_to do |format|

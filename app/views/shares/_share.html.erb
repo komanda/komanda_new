@@ -1,5 +1,5 @@
 <article id="<%= share.id %>" class="media default">
-	<% if current_user && authenticated_user?(share) %>
+	<% if authenticated_user?(share) %>
 		<%= link_to "×", share, 
 			class: "close", 
 			"rel"=>"tooltip",
@@ -8,24 +8,34 @@
 			method: :delete, remote: true %>
 	<% end -%>
 	
-	<%= link_to (image_tag share.user.img_url, size: "40x40"), 
-		share.user.profile_url, class: "pull-left" %>
-	<div class="media-body">
-		<div class="media-header">
-			<%= link_to share.user.name, share.user.profile_url %>
+	<div class="row">
+		<div class="span4">Shared by <%= link_to share.user.name, share.user.profile_url %>
+			<small class="muted"><%= time_ago_in_words share.created_at %></small>
 		</div>
-		
-		<p class="muted">
-			<%= time_tag share.date, format: "%B %e" %> at <%= time_tag share.time, format: "%l:%M %P" %>
-		</p>
-		
-		<% unless share.content.blank? %>
-				<p><%= share.content %></p>
-		<% end %>
-		
-		<% unless share.url.blank? %>
-			<p><a href="<%= share.url %>"><%= share.url %></a></p>
-		<% end %>
 	</div>
+	<hr>
+	
+	<table>
+		<tr>
+			<td class="icon"><i class="icon-calendar"></i></td>
+			<td class="content"><%= time_tag share.date, format: "%B %e" %>, 
+				<%= time_tag share.time, format: "%l:%M %P" %></td>
+		</tr>
+		
+		<% unless share.content.blank? %>		
+		<tr>
+			<td class="icon"><i class="icon-info-sign"></i></td>
+			<td class="content"><%= share.content %></td>
+		</tr>
+		<% end %>
+	
+		<% unless share.url.blank? %>
+			<tr>
+				<td class="icon"><i class="icon-link"></i></td>
+				<td class="content"><a href="<%= share.url %>"><%= truncate share.url, length: 35 %></a></td>
+			</tr>
+		<% end %>
+	</table>	
+	
 </article>
 

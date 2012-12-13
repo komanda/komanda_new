@@ -3,15 +3,7 @@ class ApplicationController < ActionController::Base
 
 
   
-  helper_method :current_user, :admin_user, :admin_user?, :pictures
-  
-  def save_return_to
-    session[:return_to] = request.referer
-  end
-  
-  def return_to(default)
-    redirect_to(session.delete(:return_to) || default)
-  end
+  helper_method :current_user, :admin_user, :admin_user?, :authenticated_user?
 
   private
     def current_user
@@ -28,5 +20,19 @@ class ApplicationController < ActionController::Base
     
     def admin_user?
       current_user.admin
+    end
+    
+    def authenticated_user?(object)
+      if current_user
+        if object.class.to_s == "Share"
+          return current_user.shares.include?(object) || current_user.admin
+        elsif object.class.to_s == "Suggestion"
+          return current_user.suggestions.include?(object) || current_user.admin
+        else
+          return current_user.comments.include?(object) || current_user.admin
+        end
+      end
+      
+      return false
     end
 end

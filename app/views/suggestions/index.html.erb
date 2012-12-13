@@ -86,7 +86,7 @@
 				<%= link_to "More", root_path %>
 			<% end -%>
 
-			<hr class="bs-docs-separator">
+			<hr>
 		<% end -%>
 
 		<% if @previous.count > 0 %>
@@ -101,7 +101,17 @@
 				<%= link_to "More", root_path %>
 			<% end -%>
 
-			<hr class="bs-docs-separator">
+			<hr>
 		<% end -%>
+		
+		<% if @shares.count > 0 %>
+			<p class="lead muted">Shared events</p>
+			<div id="shares">
+				<%= render @shares %>
+			</div>
+			<%= link_to "More", shares_path, class: "more-link" %>
+			
+			<hr>
+		<% end %>
 	</aside>
 </div>

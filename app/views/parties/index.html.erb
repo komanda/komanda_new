@@ -14,7 +14,7 @@
 		<% else %>			
 			<div class="lead">
 				We are planning our next event.
-				Have a suggestion? <%= link_to "Let us know!", suggestions_path %> Or <%= link_to "share", "#" %> an event your are going to!
+				Have a suggestion? <%= link_to "Let us know!", suggestions_path %> Or <%= link_to "share", shares_path %> an event your are going to!
 			</div>
 		<% end -%>
 
@@ -51,6 +51,15 @@
 			<p class="lead muted">Popular suggestions</p>
 			<%= render @suggestions %>
 			<%= link_to "More", suggestions_path %>
+			<hr>
+		<% end -%>
+		
+		<% if @shares.count > 0 %>
+			<p class="lead muted">Shared events</p>
+			<div id="shares">
+				<%= render @shares %>
+			</div>
+			<%= link_to "More", shares_path, class: "more-link" %>
 			<hr>
 		<% end -%>
 

@@ -34,11 +34,9 @@
 		    </div>
 		    <div class="visible-phone">
 			    <ul class="nav">
-		        	<li class="<%= "active" unless !parties_controller? %>"><%= link_to "Events", parties_path  %></li>
+		      <li class="<%= "active" unless !parties_controller? %>"><%= link_to "Events", parties_path  %></li>
 					<li class="<%= "active" unless !suggestions_controller? %>"><%= link_to "Suggestions", suggestions_path  %></li>
-					<li>
-						<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">Share</a>
-					</li>
+					<li class="<%= "_active" unless !shares_controller? %>"><%= link_to "Shares", shares_path  %></li>
 					<li>
 						<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">K-stuff</a>
 					</li>

@@ -100,6 +100,17 @@
 body {
   background-color: whiteSmoke;
 }
+i {
+	opacity: 0.5;
+}
+
+td.icon {
+	vertical-align: top;
+	width: 20px;
+}
+td.content {
+	padding-bottom: 9px;
+}
 
 a:hover {
     color: #ED1C24;
@@ -413,7 +424,7 @@ header {
 .aside {
   padding-left: 15px;
   position: fixed;
-  left: 64%;
+  left: 63%;
   height: 95%;
   overflow-y: scroll;
   
@@ -427,7 +438,7 @@ header {
 }
 
 .suggestions-aside {
-  left: 58%;
+  left: 55%;
 }
 
 .parties-sidebar {  
@@ -455,9 +466,6 @@ header {
       }
     }
   }
-  .more-link {
-    margin-top: 1em;
-  } 
 }
 /* party-modal */
 #party-modal {
@@ -661,8 +669,8 @@ header {
   }
 
   .star {
-    width: 30px;
-    margin-top: -21px;
+    width: 25px;
+    margin-top: -20px;
     margin-bottom: -13px;
   }
 
@@ -753,3 +761,19 @@ header {
 select {
 	width: 75px;
 }
+#shares {
+	margin-bottom: 1em;
+	article.default {
+		padding: 10px;
+	}
+	ul:last-child {
+		margin-bottom: 1em;
+	}
+	article:hover {
+    border-color: #BDBDBD;
+	}
+	hr {
+		margin: 10px 0;
+	}
+}
+

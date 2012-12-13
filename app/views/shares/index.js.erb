@@ -1,0 +1,7 @@
+$("#shares").append("<%= escape_javascript(render @shares) %>")
+
+<% if @skip >= @shares.count %>
+	$("#more").remove()
+<% else %>
+	$("#more").attr("href", "/shares?skip=<%= @skip %>")
+<% end %>

@@ -1,10 +1,23 @@
 class SharesController < ApplicationController
-  helper_method :authenticated_user?
   before_filter :logged_in, only: [:new, :create]
   
   def index
-    @share = Share.new
-    @shares = Share.all.desc(:created_at)
+    if params[:skip]
+      @skip = params[:skip].to_i
+      @shares = Share.desc(:date).skip(@skip)
+      @skip = @skip + 10
+    else
+      today = Time.now
+      @share = Share.new
+      @shares = Share.all.desc(:date).limit(10)
+      @upcoming = Party.where(:when.gte => today).desc(:when).limit(3)
+      @previous = Party.where(:when.lt => today).desc(:when).limit(3)
+      @suggestions = Suggestion.order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc).limit(3)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -44,9 +57,5 @@ class SharesController < ApplicationController
       else
         return false
       end
-    end
-    
-    def authenticated_user?(share)
-      return current_user.shares.include?(share) || current_user.admin
     end
 end
