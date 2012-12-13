@@ -14,9 +14,7 @@
 							class: "btn btn-success join-button", id: "join_button_#{object.id}", remote: true %>
 					<% end -%>
 				<% else %>
-					<a id="join_button" class="btn btn-success join-button" rel="popover" data-placement="right" 
-							data-content="<div class='text-center'><%= render 'shared/signin' %></div>"
-							data-original-title="Sign in with:">Join</a>
+					<a href="#" class="btn btn-success disabled" rel="tooltip" title="Sign in to join">Join</a>
 				<% end -%>
 				<span id="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> going
 			</p>
