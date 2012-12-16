@@ -1,23 +1,45 @@
-<li class="party span2">
-
-	<article class="thumbnail">
+<li class="party hidden-phone span3">
+	<article class="party-inner">
 		<div class="flyer">
-			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-desktop", remote: true %>
-			<%= link_to image_tag(party.flyer), party_path(party), class: "visible-phone" %>
+			<%= image_tag party.flyer %>
 		</div>
+		<%= link_to party do %>
+			<div class="info">
+				<h4><%= party.title %> 
+					<small><%= time_tag party.when, format: "%B %e, %l:%M %P" %></small></h4>
+				<p><small><%= raw truncate(party.description, length: 180) %></small></p>
+			</div>
+		<% end %>
 
-		<h4><%= link_to party.title, party %></h4>
-
-		<footer class="muted">
-			<%= link_to("#{party_path(party)}#pictures") do %>
-				<strong><small><%= pluralize(party.pics.count, "pic") %>
-			<% end %>
-			<span> | </span>
-			<%= link_to("#{party_path(party)}#comments") do %>
-				<%= pluralize(party.comments.count, "comment") %></small></strong>
-			<% end %>
+		<footer class="text-right">
+			<small><strong>
+				<%= link_to "#{party_path(party)}#pictures" do %>
+					<i class="icon-picture"></i> <%= party.pics.count %>
+				<% end -%>
+			
+				<%= link_to "#{party_path(party)}#comments" do %>
+					<i class="icon-comment"></i> <%= party.comments.count %>
+				<% end -%>
+			</strong></small>
 		</footer>
-
 	</article>
+</li>
 
+<li class="visible-phone">
+	<article class="phone">
+		<div class="flyer">
+			<%= link_to (image_tag party.flyer), party %>	
+		</div>
+		<p class="muted"><%= pluralize(party.going.count, "person") %> went</p>
+		<p>
+			<%= link_to party, class: "btn btn-mini" do %>
+				<i class="icon-star"></i> Rate
+			<% end -%>
+			
+			<%= link_to "#{party_path(party)}#new_comment", class: "btn btn-mini" do %>
+				<i class="icon-comment"></i> Comment
+			<% end -%>
+		</p>
+		<hr>
+	</article>
 </li>

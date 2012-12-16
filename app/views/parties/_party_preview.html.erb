@@ -1,34 +1,83 @@
-<div class="party-preview">
-		<%= link_to (image_tag object.flyer, class: "img-polaroid span3 pull-left"), object %>
-
-		<!-- <div class="span4"> -->
-			<h3><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h3>
-			<hr class="bs-dosc-separator">
-			<p class="muted">
-				<% if current_user %>
-					<% if object.going.include?(current_user.id) %>
-						<button id="join_button_<%= object.id %>" class="btn btn-success disabled join-button">Going</button>
-					<% else %>
-						<%= link_to "Join", 
-							"#{parties_join_path}?party=#{object.id}", 
-							class: "btn btn-success join-button", id: "join_button_#{object.id}", remote: true %>
-					<% end -%>
-				<% else %>
-					<a href="#" class="btn btn-success disabled join-button" rel="tooltip" title="Sign in to join">Join</a>
-				<% end -%>
-				<span id="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> going
-			</p>
-			<hr class="bs-dosc-separator">
-			
-			<%= raw object.description %>
-		<!-- </div> -->
-		<div class="pull-right">
-			<span>
-				<%= link_to("#{party_path(object)}#comments") do %>
-					<%= pluralize(object.comments.count, "Comment") %>
-				<% end -%>
-			</span>
-			<span class="label">Price: $<%= object.price %></span>
-			<span class="label label-important">Age: 21+</span>
+<div class="party-preview hidden-phone">
+	<div class="row">
+		<div class="span3">
+			<%= link_to (image_tag object.flyer, class: "img-polaroid"), object %>
 		</div>
+		
+		<div class="span8">
+			<h3><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h3>
+			<hr>
+			<div class="row">
+				<div class="span6">
+					<%= raw object.description %>
+				</div>
+				<div class="span2">
+					<div class="group">
+						<% if current_user %>
+							<% if object.going.include?(current_user.id) %>
+								<a href="#" class="btn btn-success disabled">Going</a>
+							<% else %>
+								<%= link_to "Join", 
+									"#{parties_join_path}?party=#{object.id}", 
+									class: "btn btn-success join_button_#{object.id}", remote: true %>
+							<% end -%>
+						<% else %>
+							<a href="#" class="btn btn-success disabled" rel="tooltip" title="Sign in to join">Join</a>
+						<% end -%>
+						<p class="muted">
+							<small><span class="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> 
+							going</small></p>
+					</div>
+					
+					<div class="group">
+						<%= link_to("#{party_path(object)}#new_comment", class: "btn") do %>
+							<i class="icon-comment"></i> Comment
+						<% end -%>
+						<div class="muted"><small><%= pluralize(object.comments.count, "Comment") %></small></div>
+					</div>
+					
+					<div class="group">
+						<%= link_to "Buy ticket", "#", class: "btn btn-primary" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			
+	<div class="pull-right">
+		<span class="label">Price: $<%= object.price %></span>
+		<span class="label label-important">Age: 21+</span>
+	</div>
+</div>
+
+<div class="visible-phone phone">
+	<div class="flyer">
+		<%= link_to (image_tag object.flyer), object %>	
+	</div>
+	<p>
+	<% if current_user %>
+		<% if object.going.include?(current_user.id) %>
+			<a href="#" class="btn btn-success btn-mini disabled">Going</a>
+		<% else %>
+			<%= link_to "Join", 
+				"#{parties_join_path}?party=#{object.id}", 
+				class: "btn btn-success btn-mini join_button_#{object.id}", remote: true %>
+		<% end -%>
+	<% else %>
+		<a href="#" class="btn btn-success disabled btn-mini" rel="tooltip" title="Sign in to join">Join</a>
+	<% end -%>
+	
+	<small class="muted"><span class="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> 
+	going</small>
+	</p>
+	<p>
+		<%= link_to object, class: "btn btn-mini" do %>
+			<i class="icon-star"></i> Rate
+		<% end -%>
+	
+		<%= link_to "#{party_path(object)}#new_comment", class: "btn btn-mini" do %>
+			<i class="icon-comment"></i> Comment
+		<% end -%>
+	</p>
+	<hr>
 </div>
