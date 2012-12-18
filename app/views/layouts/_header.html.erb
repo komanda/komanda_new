@@ -31,6 +31,7 @@
 							<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">K-stuff</a>
 						</li>
 						<% if current_user && admin_user? %>
+							<li class="divider-vertical"></li>
 	      			<li><%= link_to "Stats", stats_path %></li>
         		<% end %>
 	        </ul>

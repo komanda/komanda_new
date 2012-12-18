@@ -1,16 +1,53 @@
 <div class="party-preview hidden-phone">
+	<!--
+	<div class="tags">
+		<span class="label">Price: $<%= object.price %></span>
+		<span class="label label-important">Age: 21+</span>		
+	</div>-->
 	<div class="row">
 		<div class="span3">
 			<%= link_to (image_tag object.flyer, class: "img-polaroid"), object %>
 		</div>
 		
 		<div class="span8">
-			<h3><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h3>
+			<h3>
+				<%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small>
+			</h3>
 			<hr>
 			<div class="row">
-				<div class="span6">
+				<div class="span8">
+					<p>
+						<i class="icon-map-marker"></i> 
+							<% if object.map.blank? %>
+								<%= object.address %>
+							<% else %>
+								<%= link_to object.address, object.map, "target"=>"_blank" %>
+							<% end %>
+					</p>
 					<%= raw object.description %>
+					<div class="buttons">
+						<%= link_to "Buy ticket", "#", class: "btn btn-primary disabled", 
+							rel: "tooltip", "title" => "Work in progress..." %>	
+
+						<% if current_user %>
+							<% if object.going.include?(current_user.id) %>
+								<a href="#" class="btn btn-success disabled">Going</a>
+							<% else %>
+								<%= link_to "Join", 
+									"#{parties_join_path}?party=#{object.id}", 
+									class: "btn btn-success join_button_#{object.id}", remote: true %>
+							<% end -%>
+						<% else %>
+							<a href="#" class="btn btn-success disabled" rel="tooltip" title="Sign in to join">Join</a>
+						<% end -%>
+						<span class="muted">
+							<span class="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> 
+							going</span>
+					
+							<%= link_to pluralize(object.comments.count, "comment"), "#{party_path(object)}#comments", class: "pull-right" %>
+					</div>
 				</div>
+				<!--
 				<div class="span2">
 					<div class="group">
 						<% if current_user %>
@@ -40,13 +77,9 @@
 						<%= link_to "Buy ticket", "#", class: "btn btn-primary" %>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
-	</div>
-			
-	<div class="pull-right">
-		<span class="label">Price: $<%= object.price %></span>
-		<span class="label label-important">Age: 21+</span>
 	</div>
 </div>
 

@@ -1,7 +1,6 @@
 <div class="pull-right fb-like visible-desktop" data-send="false" data-layout="button_count" 
 	data-width="450" data-show-faces="true"></div>
-<h1><small>Upcoming events</small></h1>
-
+<h1><small>Upcoming event</small></h1>
 <% if current_user && admin_user? %>
 	<p><%= link_to "New event", new_party_path, class: "btn btn-primary btn-large" %></p>
 <% end -%>

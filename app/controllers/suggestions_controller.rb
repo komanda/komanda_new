@@ -14,8 +14,8 @@ class SuggestionsController < ApplicationController
     
     if @sort.nil? || @sort == "date"
       @suggestions = Suggestion.skip(@skip).limit(suggestions_limit).desc(:created_at)
-      @upcoming = Party.where(:when.gte => today).desc(:when).limit(3)
-      @previous = Party.where(:when.lt => today).desc(:when).limit(3)
+      @upcoming = Party.where(:when.gte => today).desc(:when)
+      @previous = Party.where(:when.lt => today).desc(:when)
       @shares = Share.desc(:date).limit(3)
     elsif @sort == "votes"
       @suggestions = Suggestion.skip(@skip).limit(suggestions_limit).order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc)

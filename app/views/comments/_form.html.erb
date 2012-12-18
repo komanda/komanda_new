@@ -7,7 +7,7 @@
 	<div class="media-body">
 		<%= form_for [object, Comment.new], remote: true do |f| %>
 
-			<%= f.text_area :content, rows: 2, class: "span5", placeholder: "Write a comment..." %>
+			<%= f.text_area :content, rows: 2, class: "span6", placeholder: "Write a comment..." %>
 			<div id="error" class="text-error hide">Comment cannot be blank.</div>
 			<%= f.submit "Post", :class => 'btn btn-primary', id: "post_button", class: "hide" %>
 

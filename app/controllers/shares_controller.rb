@@ -10,8 +10,8 @@ class SharesController < ApplicationController
       today = Time.now
       @share = Share.new
       @shares = Share.all.desc(:date).limit(10)
-      @upcoming = Party.where(:when.gte => today).desc(:when).limit(3)
-      @previous = Party.where(:when.lt => today).desc(:when).limit(3)
+      @upcoming = Party.where(:when.gte => today).desc(:when)
+      @previous = Party.where(:when.lt => today).desc(:when)
       @suggestions = Suggestion.order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc).limit(3)
     end
     respond_to do |format|

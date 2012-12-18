@@ -237,7 +237,7 @@
 
 		<% if @party %>
 			function update_party_links(party_id) {
-				var a = $("#index article a")
+				var a = $("aside ul li a")
 
 				for (var i=0; i<a.length; i++) {
 					var url = $(a[i]).attr("href").split("=")[0];

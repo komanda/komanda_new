@@ -1,8 +1,5 @@
 <div class="row">	
 	<div class="span7">
-		<div class="pull-right fb-like visible-desktop" data-send="false" 
-			data-layout="button_count" data-width="450" 	data-show-faces="true"></div>
-		
 		<p class="lead text-center">
 			Share an event with us!
 		</p>
@@ -49,47 +46,37 @@
 		<% end %>	
 	</div>
 	
-	<aside class="span5 hidden-phone suggestions-sidebar aside suggestions-aside">
+	<aside class="span3">
+		<p class="alert alert-info">
+			Have a great idea for a party but too busy to organize it all on your own? 
+			<%= link_to "Suggest", suggestions_path %> the party and we just might make it a reality!
+		</p>
+		
 		<% if @upcoming.count > 0 %>
 			<p class="lead muted">Upcoming events</p>
-			<ul class="thumbnails">
-				<% if @upcoming.count > 0 %>
-					<% @upcoming.each do |event| %>
-						<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
-					<% end -%>
-				<% end %>
-			</ul>
 			
-			<% if @upcoming.count > 3 %>
-				<%= link_to "More", root_path %>
-			<% end -%>
-
-			<hr>
-		<% end -%>
-
+			<ul class="nav nav-pills nav-stacked">
+				<% @upcoming.each do |party| %>
+					<li><%= link_to party.title, party %></li>
+				<% end %>
+			</ul>	
+		<% end %>
+		
 		<% if @previous.count > 0 %>
 			<p class="lead muted">Past events</p>
-			<ul class="thumbnails">
-				<% @previous.each do |event| %>
-					<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
-				<% end -%>
-			</ul>
-
-			<% if @previous.count > 3 %>
-				<%= link_to "More", root_path %>
-			<% end -%>
-
-			<hr>
-		<% end -%>
+			<ul class="nav nav-pills nav-stacked">
+				<% @previous.each do |party| %>
+					<li><%= link_to party.title, party %></li>
+				<% end %>
+			</ul>	
+		<% end %>
 		
-		<% if @suggestions.count > 0 %>
-			<p class="lead muted">Popular suggestions</p>
-			<%= render @suggestions %>
-			<%= link_to "More", suggestions_path %>
-			
-			<hr>
-		<% end -%>
+		<div class="well well-small visible-desktop">
+			<div class="pull-right facebook" style="width: 90px; height: 30px">
+				<div class="pull-right fb-like visible-desktop" data-send="false" 
+					data-layout="button_count" data-width="450" 	data-show-faces="true"></div>
+			</div>
+		</div>
 	</aside>
-	
 </div>
 

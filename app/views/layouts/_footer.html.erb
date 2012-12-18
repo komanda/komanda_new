@@ -1,23 +1,23 @@
 <footer id="footer">
-<div class="container">
-<div class="row">
-<div class="offset1 span10">
-<%= link_to "Contact", "/contact" %> <span class="muted"> | </span> 
-<a href="#donate-modal" data-toggle="modal" data-keyboard="true">Donate</a>
-</div>
-</div>
+	<div class="container">
+		<%= link_to (image_tag "star_empty.png", size: "40x30"), root_path, class: "pull-right" %>
+		
+		<ul class="nav nav-pills">
+			<li><%= link_to "Contact", "/contact" %> <span class="muted"></span>
+			<li><a href="#donate-modal" data-toggle="modal" data-keyboard="true">Donate</a></li>
+			<li><%= link_to "Events", parties_path %></li>
+			<li class="visible-desktop"><%= link_to "Suggestions", suggestions_path %></li>
+			<li class="visible-desktop"><%= link_to "Shares", shares_path %></li>
+		</ul>
 
-</div>
-<div id="donate-modal" class="modal fade hide" data-keyboard="true">
-<div class="modal-header">
-<button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3>Make a donation</h3>
-</div>
-
-<div class="modal-body">
-<%= render 'shared/donate' %>
-</div>
-
-</div>
-</div>
+		<div id="donate-modal" class="modal fade hide">
+			<div class="modal-header">
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Make a donation</h3>
+			</div>
+			<div class="modal-body">
+				<%= render 'shared/donate' %>
+			</div>
+		</div>
+	</div>
 </footer>

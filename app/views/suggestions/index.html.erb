@@ -1,8 +1,7 @@
 <div class="row">
 	<div class="span7">
-		<div class="pull-right fb-like visible-desktop" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
 		<p class="lead">
-			Have a great idea for a party but too busy to organize it all on your own? Suggest the party here and we just might 	make it a reality!
+			Have a great idea for a party but too busy to organize it all on your own? Suggest the party here and we just might	make it a reality!
 		</p>
 
 		<p class="text-center">
@@ -70,48 +69,36 @@
 
 		<%= render "modal" %>
 	</div>
-
-	<aside class="span5 hidden-phone suggestions-sidebar aside suggestions-aside">
+	
+	<aside class="span3">		
+		<div class="alert alert-info">
+			<%= link_to "Share", shares_path %> an event you are going to with us.
+		</div>
+		
 		<% if @upcoming.count > 0 %>
 			<p class="lead muted">Upcoming events</p>
-			<ul class="thumbnails">
-				<% if @upcoming.count > 0 %>
-					<% @upcoming.each do |event| %>
-						<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
-					<% end -%>
-				<% end %>
-			</ul>
 			
-			<% if @upcoming.count > 3 %>
-				<%= link_to "More", root_path %>
-			<% end -%>
-
-			<hr>
-		<% end -%>
-
+			<ul class="nav nav-pills nav-stacked">
+				<% @upcoming.each do |party| %>
+					<li><%= link_to party.title, party %></li>
+				<% end %>
+			</ul>	
+		<% end %>
+		
 		<% if @previous.count > 0 %>
 			<p class="lead muted">Past events</p>
-			<ul class="thumbnails">
-				<% @previous.each do |event| %>
-					<li><%= render 'parties/sidebar_party', object: [event, "x"] %></li>
-				<% end -%>
-			</ul>
-
-			<% if @previous.count > 3 %>
-				<%= link_to "More", root_path %>
-			<% end -%>
-
-			<hr>
-		<% end -%>
-		
-		<% if @shares.count > 0 %>
-			<p class="lead muted">Shared events</p>
-			<div id="shares">
-				<%= render @shares %>
-			</div>
-			<%= link_to "More", shares_path, class: "more-link" %>
-			
-			<hr>
+			<ul class="nav nav-pills nav-stacked">
+				<% @previous.each do |party| %>
+					<li><%= link_to party.title, party %></li>
+				<% end %>
+			</ul>	
 		<% end %>
+		
+		<div class="well well-small visible-desktop">
+		<div class="pull-right facebook" style="width: 90px; height: 30px">
+			<div class="fb-like visible-desktop" data-send="false" 
+				data-layout="button_count" data-width="450" data-show-faces="true"></div>
+		</div>
+		</div>
 	</aside>
 </div>
