@@ -9,12 +9,13 @@
 										              :data => { :confirm => 'Are you sure?' } %>
 		</div>
 	<% end -%>
+	<!--
 	<div class="pull-right facebook" style="width: 90px; height: 30px; margin-top: 5px">
 		<div class="pull-right fb-like visible-desktop" 
 				data-send="false" data-layout="button_count" 
 				data-width="450" data-show-faces="true"></div>
 	</div>
-	
+	-->
  	<h2><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h2>
 	<%= image_tag object.flyer, class: "img-polaroid pull-left flyer span3" %>
 
@@ -124,42 +125,24 @@
 			<ul class="thumbnails" id="pictures">
 				<% if object.pics.count > 9 %>
 					<% for i in 0..8 %>
-						<li class="img-container">
-							<%= link_to image_tag(object.pics[i]),
-								"#picture-modal",
-								"data-toggle"=>"modal" %>
+						<li id="<%= i %>" class="img-container">
+							<%= link_to image_tag(object.pics[i]), "##{i}" %>
 						</li>
 					<% end -%>
 					
 					<% for i in 9..object.pics.count - 1 %>
-						<li class="hide img-container">
-							<%= link_to image_tag(object.pics[i]),
-								"#picture-modal",
-								"data-toggle"=>"modal" %>
+						<li id="<%= i %>" class="hide img-container">
+							<%= link_to image_tag(object.pics[i]), "##{i}" %>
 						</li>
 					<% end -%>
 				<% else %>
-					<% object.pics.each do |pic| %>
-						<li class="img-container">
-							<%= link_to image_tag(pic),
-								"#picture-modal",
-								"data-toggle"=>"modal" %>
+					<% for i in 0..object.pics.count - 1 %>
+						<li i="<%= i %>" class="img-container">
+							<%= link_to image_tag(object.pics[i]), "##{i}"%>
 						</li>
-
 					<% end -%>
 				<% end -%>
 			</ul>
-			
-			<div id="picture-modal" class="modal hide hidden-phone" data-keyboard="true">	
-				<div class="modal-body">
-					<button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-					<p>Image <span id="picture_index">1</span>/<span id="total"><%= object.pics.count %></span></p>
-					<%= image_tag object.pics.first, id: "modal-picture" %>
-							
-					<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
-			  		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
-				</div>
-			</div>
 		<% end -%>
 	</div>
 
@@ -200,6 +183,13 @@
 		<% else %>
 			<div class="text-center signin">Sign in with <%= render 'shared/signin' %> to leave a comment.</div>
 		<% end %>
+	</div>
+</div>
+<div id="picture-modal" style="display: none">
+	<div class="image">
+		<img src="">
+		<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
+ 		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
 	</div>
 </div>
 

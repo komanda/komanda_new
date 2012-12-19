@@ -620,10 +620,10 @@ header {
   .flyer {
     margin: 0em 1em 1em 0;
   }
-
+	/*
   #picture-modal {
-    top: 40%;
-    left: 36%;
+    top: 0;
+    left: 32%;
     width: 71%;
     height: 93%;
     -webkit-border-radius: 4px;
@@ -647,6 +647,7 @@ header {
       }
     }
   }
+*/
   .separator {
     border-top: 1px solid #D8D8D8;
     border-bottom: 1px solid #D8D8D8;
@@ -858,4 +859,22 @@ aside {
 	.lead {
 		margin-bottom: 5px;
 	}
+}
+
+#picture-modal {
+/*	z-index: -1;*/
+/*	opacity: 0;*/
+	position:fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .9);
+	text-align: center;
+	img {
+		padding: 10px 0;
+	}
+	-webkit-transition: opacity 0.2s easy;
+	transition: opacity 0.2s easy;
 }

@@ -175,11 +175,13 @@
 
 		function close_modals_with_esc() {
 			$(this).keydown(function(e) {
-				if (e.keyCode == 27)
+				if (e.keyCode == 27) {
 					$(".modal-close").click()
+					$("#picture-modal").hide()
+				}
 			})
 		}
-
+		
 		attach_left_right_keys()
 
 		function attach_left_right_keys() {
@@ -206,32 +208,36 @@
 			}
 
 			for (var i=0; i < items.length; i++) {
-				$(items[i]).find("img").first().click(function() {
-					$("#modal-picture").attr("src", $(this).attr("src"));
+				$(items[i]).find("img").first().click(function(e) {
+					
+					$("#picture-modal img").attr("src", $(this).attr("src"));
 
 					var index = imgs.indexOf($(this).attr("src"))
-					$("#picture_index").text(index + 1); 
-					$("#modal-picture").attr("src", $(this).attr("src"));  
+					// $("#picture_index").text(index + 1); 
+					// $("#picture-modal").attr("src", $(this).attr("src"));  
 
 					$("#next-button").click(function() {
-						$("#modal-picture").attr("src", imgs[(index + 1)%imgs.length]); 
+						console.log("next")
+						$("#picture-modal img").attr("src", imgs[(index + 1)%imgs.length]); 
 						index++;
-						$("#picture_index").text(index % imgs.length + 1);
+						// $("#picture_index").text(index % imgs.length + 1);
 					});
 
 					$("#prev-button").click(function() {
+						console.log("prev")
 						if (index == 0) {
 							index = imgs.length;
-							$("#modal-picture").attr("src", imgs[index - 1]); 
+							$("#picture-modal img").attr("src", imgs[index - 1]); 
 						}
 						else {
-							$("#modal-picture").attr("src", imgs[(index - 1)%imgs.length]); 
+							$("#picture-modal img").attr("src", imgs[(index - 1)%imgs.length]); 
 						}
 						index--;
-						$("#picture_index").text(index % imgs.length + 1);
+						// $("#picture_index").text(index % imgs.length + 1);
 					});
+					
+					$("#picture-modal").show()
 				})
-				$("modal-picture").modal('toggle')
 			}
 		}
 
