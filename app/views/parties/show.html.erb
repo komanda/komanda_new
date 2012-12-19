@@ -17,7 +17,12 @@
 			<ul class="nav nav-pills nav-stacked">
 				<% @upcoming.each do |party| %>
 					<li id="<%= party.id %>" class="<%= 'active' unless party.id != @party.id %> scroll">
-						<%= link_to party.title, "#{party_path(party)}?prev=#{@party.id}", remote: true %>
+						<%= link_to "#{party_path(party)}?prev=#{@party.id}", remote: true do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
 					</li>
 				<% end %>
 			</ul>	
@@ -28,7 +33,13 @@
 			<ul class="nav nav-pills nav-stacked">
 				<% @previous.each do |party| %>
 					<li id="<%= party.id %>" class="<%= 'active' unless party.id != @party.id %> scroll">
-						<%= link_to party.title, "#{party_path(party)}?prev=#{@party.id}", remote: true %>
+						<%= link_to "#{party_path(party)}?prev=#{@party.id}", remote: true do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">  
+								<i class="icon-picture"></i> <%= party.pics.count %>
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
 					</li>
 				<% end %>
 			</ul>	

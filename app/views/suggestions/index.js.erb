@@ -1,5 +1,5 @@
 <% if @replace %>
-	$('#hidden_link').attr("href", "#")
+	// $('#hidden_link').attr("href", "#")
 	$('#suggestions').html("<%= escape_javascript(render @suggestions) %>")
 <% else %>
 	$('#suggestions').append("<%= escape_javascript(render @suggestions) %>")
@@ -13,16 +13,16 @@
 <% end %>
 
 <% if @done %>
-	$("#more").remove()
+	$("#more-btn").remove()
 <% else %>
-	if ($("#more").show().length == 0) {
-		var more = $("<a id='more' class='more' data-loading-text='Loading' data-remote='true'>More</a>")
+	if ($("#more-btn").show().length == 0) {
+		var more = $("<a id='more-btn' class='more' data-loading-text='Loading' data-remote='true'>More</a>")
 		$("#more_link").append(more)
 	}	
-	$("#more").attr("href", URI)
-	load_more_on_scroll()
+	$("#more-btn").attr("href", URI)
 <% end %>
 
+$("#more-btn").button('reset')
 fix_collapse_links("<%= @suggestions.first.id %>")
 fix_forms()
 fix_suggestion_comment_loading_effect()

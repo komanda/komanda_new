@@ -106,9 +106,28 @@ body {
 }
 ul.nav-pills li a:hover {
 	background-color:white;
+	.stats {
+		opacity: 1;
+	}
+}
+ul.nav-pills li.active {
+	.stats {
+		color: white;
+		opacity: 1;
+	}
 }
 i {
 	opacity: 0.5;
+}
+ul.nav-pills li a {
+	.stats {
+		opacity: 0;
+		-moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+	}
 }
 
 td.icon {

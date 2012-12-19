@@ -38,9 +38,9 @@
 			<% if @shares.count > 10 %>
 				<%= link_to "More", 
 					"#{shares_path}?skip=10", 
-					"data-loading-text"=>"Loading",
+					"data-loading-text"=>"Loading...",
+					id: "more-link",
 					class: "more",
-					id: "more", 
 					remote: true %>
 			<% end %>	
 		<% end %>	
@@ -57,7 +57,14 @@
 			
 			<ul class="nav nav-pills nav-stacked">
 				<% @upcoming.each do |party| %>
-					<li><%= link_to party.title, party %></li>
+					<li>
+						<%= link_to party do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">  
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
+					</li>
 				<% end %>
 			</ul>	
 		<% end %>
@@ -66,7 +73,15 @@
 			<p class="lead muted">Past events</p>
 			<ul class="nav nav-pills nav-stacked">
 				<% @previous.each do |party| %>
-					<li><%= link_to party.title, party %></li>
+					<li>
+						<%= link_to party do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">  
+								<i class="icon-picture"></i> <%= party.pics.count %>								
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
+					</li>
 				<% end %>
 			</ul>	
 		<% end %>

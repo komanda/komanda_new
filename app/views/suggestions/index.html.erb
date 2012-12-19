@@ -61,7 +61,7 @@
 					
 			<p id="more_link">
 				<% unless @done %>
-					<%= link_to "More", "/suggestions?skip=#{@skip}", id: "more", class: "more", 
+					<%= link_to "More", "/suggestions?skip=#{@skip}", id: "more-btn", class: "more", 
 						"data-loading-text"=>"Loading...", remote: true %>
 				<% end %>
 			</p>
@@ -80,7 +80,14 @@
 			
 			<ul class="nav nav-pills nav-stacked">
 				<% @upcoming.each do |party| %>
-					<li><%= link_to party.title, party %></li>
+					<li>
+						<%= link_to party do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">  
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
+					</li>
 				<% end %>
 			</ul>	
 		<% end %>
@@ -89,7 +96,15 @@
 			<p class="lead muted">Past events</p>
 			<ul class="nav nav-pills nav-stacked">
 				<% @previous.each do |party| %>
-					<li><%= link_to party.title, party %></li>
+					<li>
+						<%= link_to party do %>
+							<%= party.title %>
+							<small class="pull-right muted stats">  
+								<i class="icon-picture"></i> <%= party.pics.count %>
+								<i class="icon-comment"></i> <%= party.comments.count %>
+							</small>
+						<% end %>
+					</li>
 				<% end %>
 			</ul>	
 		<% end %>

@@ -1,7 +1,8 @@
 $("#shares").append("<%= escape_javascript(render @shares) %>")
 
-<% if @skip >= @shares.count %>
-	$("#more").remove()
+<% if @done %>
+	$("#more-link").remove()
 <% else %>
-	$("#more").attr("href", "/shares?skip=<%= @skip %>")
+	$("#more-link").attr("href", "/shares?skip=<%= @skip %>")
+	$("#more-link").button("reset")
 <% end %>

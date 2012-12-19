@@ -4,8 +4,9 @@ class SharesController < ApplicationController
   def index
     if params[:skip]
       @skip = params[:skip].to_i
-      @shares = Share.desc(:date).skip(@skip)
+      @shares = Share.desc(:date).skip(@skip).limit(10)
       @skip = @skip + 10
+      @done = @skip >= @shares.count ? true : false
     else
       today = Time.now
       @share = Share.new
