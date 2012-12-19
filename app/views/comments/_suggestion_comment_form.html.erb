@@ -1,7 +1,8 @@
 <div class="media">
 	<div class="pull-left">
 		<%= link_to image_tag(current_user.img_url || "star_empty.png", class: "img-rounded", size: "40x40"),
-			current_user.profile_url %>
+			current_user.profile_url,
+			target: "_blank" %>
 	</div>
 
 	<div class="media-body">

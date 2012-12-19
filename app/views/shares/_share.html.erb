@@ -9,7 +9,7 @@
 	<% end -%>
 	
 	<div class="row">
-		<div class="span4">Shared by <%= link_to share.user.name, share.user.profile_url %>
+		<div class="span4">Shared by <%= link_to share.user.name, share.user.profile_url, target: "_blank" %>
 			<small class="muted"><%= time_ago_in_words share.created_at %></small>
 		</div>
 	</div>

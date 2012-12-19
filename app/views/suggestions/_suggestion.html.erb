@@ -10,47 +10,18 @@
 
 	<!-- <div class="collapse-link" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle"> -->
 		<div class="pull-left">
-			<%= image_tag(suggestion.user.img_url, size: "40x40", class: "img-rounded") %>
+			<%= link_to image_tag(suggestion.user.img_url, size: "40x40", class: "img-rounded"),
+				suggestion.user.profile_url,
+				target: "_blank" %>
 		</div>
 
 		<div class="media-body">
 			<div class="media-header">
-				<%= link_to suggestion.user.name, suggestion.user.profile_url %>
+				<%= link_to suggestion.user.name, suggestion.user.profile_url, target: "_blank" %>
 				<small class="muted"><%= time_ago_in_words(suggestion.created_at) %> ago</small>
 			</div>
 
 			<div class="collapse-div" data-toggle="collapse" data-target="#<%= suggestion.id %>-toggle">
-				<!--
-				<% if !suggestion.location.nil? %>
-					<p>
-						<strong>Location</strong> - <%= suggestion.location %>
-					</p>
-				<% end %>
-
-				<% if !suggestion.music.nil? %>
-					<p>
-						<strong>Music</strong> - <%= suggestion.music %>
-					</p>
-				<% end %>
-
-				<% if !suggestion.games.nil? %>
-					<p>
-						<strong>Games</strong> - <%= suggestion.games %>
-					</p>
-				<% end %>
-
-				<% if !suggestion.food_drinks.nil? %>
-					<p>
-						<strong>Food/Drinks</strong> - <%= suggestion.food_drinks %>
-					</p>
-				<% end %>
-
-				<% if !suggestion.other.nil? %>
-					<p>
-						<strong>Other</strong> - <%= suggestion.other %>
-					</p>
-				<% end %>
-				-->
 				<table>
 					<% unless suggestion.location.nil? %>
 						<tr>

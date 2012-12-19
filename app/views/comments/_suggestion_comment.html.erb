@@ -9,11 +9,14 @@
 	<% end %>
 
 	<%= link_to image_tag(object[1].user.img_url || "star_empty.png", 
-		size: "40x0", class: "img-rounded"), object[1].user.profile_url, class: "pull-left" %>
+		size: "40x0", class: "img-rounded"), 
+		object[1].user.profile_url, 
+		class: "pull-left",
+		target: "_blank" %>
 
 	<div class="media-body">
 		<div class="media-heading">
-		<%= link_to object[1].user.name, object[1].user.profile_url %>
+		<%= link_to object[1].user.name, object[1].user.profile_url, target: "_blank" %>
 		<small class="muted"><%= time_ago_in_words(object[1].created_at) %> ago</small>
 		</div>
 		<%= object[1].content %>
