@@ -9,15 +9,15 @@
 										              :data => { :confirm => 'Are you sure?' } %>
 		</div>
 	<% end -%>
-	<!--
+	
 	<div class="pull-right facebook" style="width: 90px; height: 30px; margin-top: 5px">
 		<div class="pull-right fb-like visible-desktop" 
 				data-send="false" data-layout="button_count" 
 				data-width="450" data-show-faces="true"></div>
 	</div>
-	-->
+	
  	<h2><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h2>
-	<%= image_tag object.flyer, class: "img-polaroid pull-left flyer span3" %>
+	<%= image_tag object.flyer, class: "pull-left flyer span3" %>
 
 	<% if current_user %>				
 		<div id="rate" val="<%= @party.get_rating %>">
@@ -228,7 +228,7 @@
 						vertical-align: middle;
 						max-width: 100%;
 						max-height: 100%;"
-						src="">
+						src="" class="img-rounded">
 				</div>				
 			</div>			
 		</div>

@@ -14,19 +14,15 @@
 	 
 	      <div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="divider-vertical"></li>
-	        	<li class="first <%= "_active" unless !parties_controller? %>">
+	        	<li class="first <%= "active" unless !parties_controller? %>">
 							<%= link_to "Events", parties_path  %>
 						</li>
-						<li class="divider-vertical"></li>
-						<li class="<%= "_active" unless !suggestions_controller? %>">
+						<li class="<%= "active" unless !suggestions_controller? %>">
 							<%= link_to "Suggestions", suggestions_path  %>
 						</li>
-						<li class="divider-vertical"></li>
-						<li class="<%= "_active" unless !shares_controller? %>">
+						<li class="<%= "active" unless !shares_controller? %>">
 							<%= link_to "Shares", shares_path  %>
 						</li>
-						<li class="divider-vertical"></li>
 						<li>
 							<a rel="tooltip" data-placement="bottom" data-original-title="Work in progress...">K-stuff</a>
 						</li>
