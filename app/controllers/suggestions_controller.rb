@@ -70,7 +70,7 @@ class SuggestionsController < ApplicationController
 
   def destroy
     @suggestion = Suggestion.find(params[:id])    
-    if @suggestion && authenticated_user(@suggestion)
+    if @suggestion && authenticated_user?(@suggestion)
       @suggestion.destroy
       @count = Suggestion.count
     else
@@ -118,9 +118,5 @@ class SuggestionsController < ApplicationController
       else
         return false
       end
-    end
-
-    def authenticated_user(suggestion)
-      return current_user.suggestions.include?(suggestion) || current_user.admin
     end
 end

@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     if (params[:party_id])
       @party = Party.find(params[:party_id])
       @comment = @party.comments.find(params[:id])
-      if authenticated_user(@comment)
+      if authenticated_user?(@comment)
         @comment.destroy
       else
         redirect_to root_url
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
     else
       @suggestion = Suggestion.find(params[:suggestion_id])
       @comment = @suggestion.comments.find(params[:id])
-      if authenticated_user(@comment)
+      if authenticated_user?(@comment)
         @comment.destroy
         @suggestion.update_attribute(:comment_counter, @suggestion.comments.count)
       else
