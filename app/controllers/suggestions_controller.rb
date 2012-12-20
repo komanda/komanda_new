@@ -4,7 +4,7 @@ class SuggestionsController < ApplicationController
   
   def index
     suggestions_limit = 10 
-    today = Time.now
+    today = Date.current()
     
     @suggestion = Suggestion.new
     @skip = (params[:skip].nil? ? 0 : params[:skip].to_i)

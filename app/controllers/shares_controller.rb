@@ -8,7 +8,7 @@ class SharesController < ApplicationController
       @skip = @skip + 10
       @done = @skip >= @shares.count ? true : false
     else
-      today = Time.now
+      today = Date.current()
       @share = Share.new
       @shares = Share.all.desc(:date).limit(10)
       @upcoming = Party.where(:when.gte => today).desc(:when)
