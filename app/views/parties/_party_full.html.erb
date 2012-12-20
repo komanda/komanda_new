@@ -109,7 +109,7 @@
 	<span class="label label-important">Age: 21+</span>
 
 	<!-- pictures -->
-	<div class="visible-desktop">
+	<div class="">
 		<% if object.pics.count > 0 %>
 			<div class="separator">
 				<strong> Picutres (<%= object.pics.count %>)</strong>
@@ -125,20 +125,20 @@
 			<ul class="thumbnails" id="pictures">
 				<% if object.pics.count > 9 %>
 					<% for i in 0..8 %>
-						<li id="<%= i %>" class="img-container">
-							<%= link_to image_tag(object.pics[i]), "##{i}" %>
+						<li class="img-container">
+							<%= link_to image_tag(object.pics[i]), "#" %>
 						</li>
 					<% end -%>
 					
 					<% for i in 9..object.pics.count - 1 %>
-						<li id="<%= i %>" class="hide img-container">
-							<%= link_to image_tag(object.pics[i]), "##{i}" %>
+						<li class="hide img-container">
+							<%= link_to image_tag(object.pics[i]), "#" %>
 						</li>
 					<% end -%>
 				<% else %>
 					<% for i in 0..object.pics.count - 1 %>
-						<li i="<%= i %>" class="img-container">
-							<%= link_to image_tag(object.pics[i]), "##{i}"%>
+						<li class="img-container">
+							<%= link_to image_tag(object.pics[i]), "#"%>
 						</li>
 					<% end -%>
 				<% end -%>
@@ -185,11 +185,57 @@
 		<% end %>
 	</div>
 </div>
+<!--
 <div id="picture-modal" style="display: none">
 	<div class="image">
 		<img src="">
 		<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
  		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
+	</div>
+</div>
+-->
+<div id="picture-modal" style="display:none">
+	<div style="
+		min-width: 440px;
+		height: auto;
+		left: 0;
+		min-height: 100%;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 400;
+		display: table;
+		height: 100% !important;
+		table-layout: fixed;
+		width: 100%;
+		background-color: rgba(0, 0, 0, .9);">
+		<div style="
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+			width: 100%;">
+			<div style="
+				display: inline-block;
+				margin: 10px 0;
+				text-align: left;">
+				<div style="
+					min-height: 400px;
+					min-width: 400px;
+					position: relative;
+					text-align: center;">
+					<img style="
+						
+						display: inline-block;
+						vertical-align: middle;
+						max-width: 100%;
+						max-height: 100%;"
+						src="">
+				</div>				
+			</div>			
+		</div>
+		<a id="prev-button" class="carousel-control left" href="" data-slide="prev">&lsaquo;</a>
+ 		<a id="next-button" class="carousel-control right" href="" data-slide="next">&rsaquo;</a>
+		
 	</div>
 </div>
 

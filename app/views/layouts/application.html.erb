@@ -209,7 +209,7 @@
 
 			for (var i=0; i < items.length; i++) {
 				$(items[i]).find("img").first().click(function(e) {
-					
+					e.preventDefault()
 					$("#picture-modal img").attr("src", $(this).attr("src"));
 
 					var index = imgs.indexOf($(this).attr("src"))
@@ -381,10 +381,10 @@
 
 		fix_scroll_top()
 		function fix_scroll_top() {
-			$(".scroll").click(function() {
-				$("#content").css("opacity", '0.3')
-				$('html, body').animate({scrollTop:0}, 'slow');	
-			})
+			// $(".scroll").click(function() {
+			// 				$("#content").css("opacity", '0.3')
+			// 				$('html, body').animate({scrollTop:0}, 'slow');	
+			// 			})
 		}
 		
 		/* Add date picker */
