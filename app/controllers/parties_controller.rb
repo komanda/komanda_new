@@ -4,7 +4,7 @@ class PartiesController < ApplicationController
   # GET /parties
   # GET /parties.json
   def index
-    @today = Date.current()
+    @today = Date.current() - 8.hour
      
     if params[:sidebar]
       @sidebar = true
@@ -50,7 +50,7 @@ class PartiesController < ApplicationController
     @party.inc(:views, 1)
 
     unless @prev || @modal  
-      today = Date.current()
+      today = Date.current() - 8.hour
       @upcoming = Party.where(:when.gte => today).desc(:when)
       @previous = Party.where(:when.lt => today).desc(:when).limit(4)
       # @parties = Party.all.desc(:when).limit(5).to_a
