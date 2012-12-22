@@ -16,7 +16,14 @@
 				data-width="450" data-show-faces="true"></div>
 	</div>
 	
- 	<h2><%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small></h2>
+ 	<h2><%= object.title %> 
+		<small>
+			<% unless object.date.nil? %>
+				<%= time_tag object.date, format: "%B %e" %>, 
+				<%= time_tag object.time, format: "%l:%M %P" %>
+			<% end %>
+		</small>
+	</h2>
 	<%= image_tag object.flyer, class: "pull-left flyer span3" %>
 
 	<% if current_user %>				
@@ -67,9 +74,6 @@
 	<hr>
 	
 	<p class="muted">
-		<% if @party.when >= Time.now %>
-
-		<% end %>
 		<%= link_to "Buy ticket", "#", 
 			class: "btn btn-primary disabled", 
 			rel: "tooltip", 
@@ -77,10 +81,10 @@
 		<% if current_user %>
 			<% if object.going.include?(current_user.id) %>
 				<button id="join_button_<%= @party.id %>" class="btn btn-success disabled join-button">Going</button>
-			<% elsif Time.now < object.when %>
+			<% elsif object.date >= (Date.current() - 8.hour).to_date %>
 				<%= link_to "Join", 
 					"#{parties_join_path}?party=#{object.id}", 
-					class: "btn btn-success join-button", id: "join_button_#{@party.id}", remote: true %>
+					class: "btn btn-success join-button join_button_#{@party.id}",remote: true %>
 			<% else %>
 				<button id="join_button_<%= @party.id %>" class="btn btn-success disabled join-button">Join</button>
 			<% end -%>
@@ -88,7 +92,7 @@
 			<a id="join_button_<%= @party.id %>" class="btn btn-success join-button disabled"
 				rel="tooltip" title="Sign in to join">Join</a>
 		<% end -%>
-		<span id="going_counter_<%= @party.id %>"><%= pluralize object.going.count, "person" %></span> going
+		<span class="going_counter_<%= @party.id %>"><%= pluralize object.going.count, "person" %></span> going
 	</p>
 
 	<hr class="bs-dosc-separator">

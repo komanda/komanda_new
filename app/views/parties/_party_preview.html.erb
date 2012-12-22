@@ -6,7 +6,11 @@
 		
 		<div class="span8">
 			<h3>
-				<%= object.title %> <small><%= time_tag object.when, format: "%B %e, %l:%M %P" %></small>
+				<%= object.title %> 
+				<small>
+					<%= time_tag object.date, format: "%B %e" %>, 
+					<%= time_tag object.time, format: "%l:%M %P" %>
+				</small>
 			</h3>
 			<hr>
 			<div class="row">

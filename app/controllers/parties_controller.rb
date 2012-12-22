@@ -9,7 +9,7 @@ class PartiesController < ApplicationController
     if params[:sidebar]
       @sidebar = true
       @skip = params[:skip].to_i
-      @parties = Party.desc(:when).skip(@skip).limit(5).to_a
+      @parties = Party.desc(:date).skip(@skip).limit(5).to_a
       @prev = Party.find(params[:prev])
       @skip += 5
       @done = Party.all.count <= @skip ? true : false
@@ -21,12 +21,12 @@ class PartiesController < ApplicationController
 
     elsif params[:skip]
       @skip = params[:skip].to_i
-      @previous = Party.where(:when.lt => @today).skip(@skip).desc(:when).limit(4)
+      @previous = Party.where(:date.lt => @today).skip(@skip).desc(:date).limit(4)
       @skip += 4
-      @done = Party.where(:when.lt => @today).count <= @skip ? true : false
+      @done = Party.where(:date.lt => @today).count <= @skip ? true : false
     else  
-      @previous = Party.where(:when.lt => @today).desc(:when).limit(4)
-      @upcoming = Party.where(:when.gt => @today).desc(:when)
+      @previous = Party.where(:date.lt => @today).desc(:date).limit(4)
+      @upcoming = Party.where(:date.gte => @today).desc(:date)
       @suggestions = Suggestion.order_by(:vote_counter.desc, :comment_counter.desc, :created_at.desc).limit(3)
       @shares = Share.desc(:date).limit(3)
     end
@@ -51,9 +51,8 @@ class PartiesController < ApplicationController
 
     unless @prev || @modal  
       today = Date.current() - 8.hour
-      @upcoming = Party.where(:when.gte => today).desc(:when)
-      @previous = Party.where(:when.lt => today).desc(:when).limit(4)
-      # @parties = Party.all.desc(:when).limit(5).to_a
+      @upcoming = Party.where(:date.gte => today).desc(:date)
+      @previous = Party.where(:date.lt => today).desc(:date)
 
       unless @upcoming.include?(@party) || @previous.include?(@party)
         if @party.when > today

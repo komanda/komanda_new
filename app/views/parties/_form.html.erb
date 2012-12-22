@@ -14,12 +14,13 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :when, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.datetime_select :when, ampm: true %>
-    </div>
-  </div>
+	<div class="control-group">
+		<%= f.label "Date/time", class: "control-label" %>
+		<div class = "controls">
+			<%= f.text_field :date, class: "date-picker" %> 
+			<%= f.time_select :time, ampm: true, minute_step: 15 %>
+		</div>
+	</div>
 
   <div class="control-group">
     <%= f.label :flyer, :class => 'control-label' %>

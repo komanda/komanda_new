@@ -6,7 +6,11 @@
 		<%= link_to party do %>
 			<div class="info">
 				<h4><%= party.title %> 
-					<small><%= time_tag party.when, format: "%B %e, %l:%M %P" %></small></h4>
+					<small>
+						<%= time_tag party.date, format: "%B %e" %>, 
+						<%= time_tag party.time, format: "%l:%M %P" %>
+					</small>
+				</h4>
 				<p><small><%= raw truncate(party.description, length: 180) %></small></p>
 			</div>
 		<% end %>

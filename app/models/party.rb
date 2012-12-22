@@ -6,7 +6,9 @@ class Party
     
   field :title
   field :description
-  field :when, :type => DateTime
+  # field :when, :type => DateTime
+  field :date, type: Date
+  field :time, type: Time
   field :flyer
   field :address
   field :map
