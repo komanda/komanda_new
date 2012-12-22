@@ -220,15 +220,15 @@
 					$("#picture_index").text(index + 1); 
 
 					$("#next-button").click(function() {
-						$("#picture-modal img").css("opacity", "0")
+						$("#picture-modal img").toggleClass("show")
 						$("#picture-modal img").attr("src", imgs[(index + 1)%imgs.length]); 
 						index++;
 						$("#picture_index").text(index % imgs.length + 1);
-						$("#picture-modal img").css("opacity", "1")
+						$("#picture-modal img").toggleClass("show")
 					});
 
 					$("#prev-button").click(function() {
-						$("#picture-modal img").css("opacity", "0")
+						$("#picture-modal img").toggleClass("show")
 						if (index == 0) {
 							index = imgs.length;
 							$("#picture-modal img").attr("src", imgs[index - 1]); 
@@ -238,7 +238,7 @@
 						}
 						index--;
 						$("#picture_index").text(index % imgs.length + 1);
-						$("#picture-modal img").css("opacity", "1")
+						$("#picture-modal img").toggleClass("show")
 					});
 					
 					$("#picture-modal").show()
