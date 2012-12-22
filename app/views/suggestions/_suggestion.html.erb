@@ -53,7 +53,7 @@
 					
 					<% unless suggestion.other.nil? %>
 						<tr>
-							<td class="icon"><i class="icon-map-marker"></td>
+							<td class="icon"><i class="icon-info-sign"></td>
 							<td class="content"><%= suggestion.other %></td>
 						</tr>
 					<% end %>
@@ -99,7 +99,7 @@
 						class: "suggestion-comments",
 						id: "load_more_comments_#{suggestion.id}") do %>
 						<span id="stat_bar_<%= suggestion.id %>"> 
-						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
+						<span id="showing_<%= suggestion.id %>">3</span> of <span id="comment_total_<%= suggestion.id %>"><%= suggestion.comment_counter %></span>
 						</span>        	
 					<% end -%>
 				<% else %>
@@ -109,7 +109,7 @@
 						id: "load_more_comments_#{suggestion.id}") do %>
 						<!-- <span id="stat_bar_<%= suggestion.id %>">  -->
 						<!-- <span class="stat-bar"> -->
-						<span id="showing_<%= suggestion.id %>">3</span>/<span id="comment_total_<%= suggestion.id %>">
+						<span id="showing_<%= suggestion.id %>">3</span> of <span id="comment_total_<%= suggestion.id %>">
 							<%= suggestion.comments.count %></span>
 						<!-- </span> -->
 					<% end -%>

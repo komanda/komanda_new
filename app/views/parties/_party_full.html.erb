@@ -159,13 +159,13 @@
 					<%= link_to("/comments?party_id=#{object.id}",
 						id: "more_comments_link",
 						remote: true) do %>
-						<span id="comments_loaded">3</span>/<span id="total_comments"><%= object.comments.count %></span>
+						<span id="comments_loaded">3</span> of <span id="total_comments"><%= object.comments.count %></span>
 					<% end -%>
 				<% else %>
 					<%= link_to("/comments?party_id=#{object.id}&skip=#{object.comments.count - 50 - 3}",
 						id: "more_comments_link",
 						remote: true) do %>
-						<span id="comments_loaded">3</span>/<span id="total_comments"><%= object.comments.count %></span>
+						<span id="comments_loaded">3</span> of <span id="total_comments"><%= object.comments.count %></span>
 					<% end -%>
 				<% end -%>
 			<% end -%>

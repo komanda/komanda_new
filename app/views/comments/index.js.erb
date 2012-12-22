@@ -15,7 +15,7 @@
 		$('#comments_loaded').text(parseInt($('#comments_loaded').text()) + 50)
 		$('#more_comments_link').attr("href", "/comments?party_id=<%= @party.id %>&skip=<%= @skip %>")
 	<% else %>
-		$('#more_comments').html("<span class='muted'>showing <%=@party.comments.count %>/<%=@party.comments.count %></span>")
+		$('#more_comments').html("<span class='muted'>showing <%=@party.comments.count %> of <%=@party.comments.count %></span>")
 	<% end %>
 <% else %>
 	var loaded_comments = $("<div class='loaded_comments_<%= @suggestion.id %>' id='loaded_comments_<%= @suggestion.id %>'></div>")
@@ -34,6 +34,6 @@
 		$('#showing_<%= @suggestion.id %>').text(parseInt($('#showing_<%= @suggestion.id %>').text()) + 50)
 		$('#load_more_comments_<%= @suggestion.id %>').attr("href", "/comments?suggestion_id=<%= @suggestion.id %>&skip=<%= @skip %>")
 	<% else %>
-		$("#<%= @suggestion.id %>-loading-msg").parent().html("<span class='muted'>showing <%= @suggestion.comments.count %>/<%= @suggestion.comments.count %></span>")
+		$("#<%= @suggestion.id %>-loading-msg").parent().html("<span class='muted'>showing <%= @suggestion.comments.count %> of <%= @suggestion.comments.count %></span>")
 	<% end %>
 <% end %>
