@@ -120,8 +120,7 @@
 
 				<% if object.pics.count > 9 %>
 					<span class="pull-right">
-						<span class="muted" id="pics_loading_msg" "data-loading-text"="loading..." %>showing </span>
-						<a href="#" id="show_pictures">9/<%= object.pics.count %></a>
+						<a href="#" id="show_pictures">show all</a>
 					</span>
 				<% end -%>
 			</div>
@@ -130,19 +129,19 @@
 				<% if object.pics.count > 9 %>
 					<% for i in 0..8 %>
 						<li class="img-container">
-							<%= link_to image_tag(object.pics[i]), "#" %>
+							<%= link_to image_tag(get_thumb_url(object.pics[i]), alt: object.pics[i]), "#" %>
 						</li>
 					<% end -%>
 					
 					<% for i in 9..object.pics.count - 1 %>
 						<li class="hide img-container">
-							<%= link_to image_tag(object.pics[i]), "#" %>
+							<%= link_to image_tag(get_thumb_url(object.pics[i]), alt: object.pics[i]), "#" %>
 						</li>
 					<% end -%>
 				<% else %>
 					<% for i in 0..object.pics.count - 1 %>
 						<li class="img-container">
-							<%= link_to image_tag(object.pics[i]), "#"%>
+							<%= link_to image_tag(get_thumb_url(object.pics[i]), alt: object.pics[i]), "#"%>
 						</li>
 					<% end -%>
 				<% end -%>
