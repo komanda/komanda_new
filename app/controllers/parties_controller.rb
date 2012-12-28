@@ -1,6 +1,6 @@
 class PartiesController < ApplicationController
   before_filter :admin_user, only: [:create, :update, :destroy]
-  before_filter :logged_in, only: [:rate, :join, :unjoin]
+  before_filter :logged_in, only: [:rate, :join, :unjoin, :ticket]
   # GET /parties
   # GET /parties.json
   def index
@@ -159,5 +159,9 @@ class PartiesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+  
+  def ticket
+    @party = Party.find(params[:id])
   end
 end

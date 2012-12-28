@@ -3,6 +3,7 @@ Komanda::Application.routes.draw do
   
   match '/stats' => 'static_pages#stats'
   match '/contact' => 'static_pages#contact'
+  match '/signin' => 'static_pages#signin'
   
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'parties#index'
@@ -19,6 +20,7 @@ Komanda::Application.routes.draw do
   match '/shares' => 'shares#index'
   
   resources :comments
+  resources :orders
 
   resources :parties do
     resources :comments

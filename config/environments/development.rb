@@ -28,4 +28,14 @@ Komanda::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+  
+  # PayPal config
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      login: "nikola_1356317801_biz_api1.gmail.com",
+      password: "1356317833",
+      signature: "A0MEZm8UcObMlW456P1ffZuEx1MEAGptLKuOr.rpk0cdOiAcsW87P9RV"
+    )
+  end
 end

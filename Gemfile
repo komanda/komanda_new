@@ -10,6 +10,7 @@ gem 'omniauth-google-oauth2'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-ui-rails'
+gem 'activemerchant', :require => 'active_merchant'
 gem 'mongoid_slug', :git => 'https://github.com/digitalplaywright/mongoid-slug'
 
 group :production do

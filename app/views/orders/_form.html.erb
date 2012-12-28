@@ -1,0 +1,92 @@
+<%= form_for @order, html: { class: "form-default form-horizontal" } do |f| %>
+	<% if @order.errors.count > 0 %>
+		<div class="alert alert-error">
+			<% @order.errors.full_messages.each do |error| %>
+				<p><%= error %></p>
+			<% end %>
+		</div>
+	<% end %>
+	
+	<div class="alert">
+		We will not store your credit card information.
+	</div>
+	
+	<table class="table table-bordered">
+		<tr>
+			<th class="span2">Price</th>
+			<td id="price" price="<%= @order.price %>"><%= number_to_currency @order.price %></td>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<td id="quantity">1</td>
+		</tr>
+		<tr class="info">
+			<th>Total</th>
+			<td id="total"><%= number_to_currency @order.price %></td>
+		</tr>
+	</table>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :quantity %></div>
+    <div class="controls">
+			<%= f.select :quantity, [1,2,3,4,5,6] %>
+    	<% f.text_field :quantity, style: "width: 20px" %>
+    </div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :first_name %></div>
+		<div class="controls">
+			<%= f.text_field :first_name %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :last_name %></div>
+		<div class="controls">
+			<%= f.text_field :last_name %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_brand %></div>
+		<div class="controls">
+			<%= f.select :card_brand, 
+			 	[["Visa", "visa"], 
+				["MasterCard", "master"], 
+				["Discover", "discover"], 
+				["American Express", "american_express"]],
+				style: "width:150px"%>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_number %></div>
+		<div class="controls">
+			<%= f.text_field :card_number %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_verification, "CVV" %></div>
+		<div class="controls">
+			<%= f.text_field :card_verification %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_expires_on %></div>
+		<div class="controls">
+			<%= f.date_select :card_expires_on, 
+				:discard_day => true, 
+				:start_year => Date.today.year, 
+				:end_year => (Date.today.year + 8),
+				:use_month_numbers => true %>
+		</div>
+	</div>
+	
+	<div class="form-actions">
+		<%= f.submit "Buy ticket", class: "btn btn-primary" %>
+		<%= link_to "Cancel", root_path, class: "btn" %>
+	</div>
+<% end %>

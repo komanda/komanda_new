@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="span7 default">
+		<p class="alert alert-error"><%= @order.transactions.last.message %></p>
+		<%= render @order %>
+		<%= link_to "Edit", edit_order_path(@order), class: "btn" %>
+		<%= link_to "Cancel", root_path, class: "btn" %>
+	</div>
+</div>

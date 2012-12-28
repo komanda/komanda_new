@@ -1,0 +1,21 @@
+<div class="default">
+	<% if @users.count > 0 %>
+		<table class="table table-bordered">
+			<tr>
+				<th>Name</th>
+				<th>#tickets</th>
+			</tr>
+			<% @users.each do |u| %>
+				<tr>
+					<td>
+						<%= link_to image_tag(u.img_url, size: "40x40"), u.profile_url, target: "_blank" %>
+						<%= link_to u.name, u.profile_url, target: "_blank" %>
+					</td>
+					<td>
+						<%= @party.tickets["#{u.id}"] %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+</div>

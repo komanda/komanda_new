@@ -15,6 +15,7 @@ class User
   has_many :comments, dependent: :destroy
   has_many :suggestions, dependent: :destroy
   has_many :shares, dependent: :destroy
+  has_many :orders, dependent: :destroy
   attr_accessible :provider, :uid, :name, :img_url, :profile_url
   validates_presence_of :provider, :uid
   

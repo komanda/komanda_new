@@ -1,0 +1,13 @@
+<% if object.class.to_s == "Party" %>
+	<% if object.date >= (Date.current() - 8.hour).to_date %>
+		<% if current_user %>
+			<%= link_to "Buy ticket", 
+				"#{new_order_path}?party_id=#{object.id}", 
+				class: "btn btn-primary" %>
+		<% else %>
+			<%= link_to "Buy ticket", 
+				signin_path, 
+				class: "btn btn-primary" %>	
+		<% end %>
+	<% end %>
+<% end %>

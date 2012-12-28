@@ -43,6 +43,7 @@
 					<tr>
 						<th>Name</th>
 						<th>Going</th>
+						<th>Tickets sold</th>
 						<th>Rating</th>
 						<th>Comments</th>
 						<th>Views</th>
@@ -51,6 +52,13 @@
 					<tr>
 						<td><%= link_to e.title, e %></td>
 						<td><%= e.going.count %></td>
+						<td>
+							<% if e.tickets.count > 0 %>
+								<%= link_to e.tickets_sold, "#{orders_path}?party_id=#{e.id}" %>
+							<% else %>
+								0
+							<% end %>
+						</td>
 						<td><%= e.get_rating %></td>
 						<td><%= e.comments.count %></td>
 						<td><%= e.views %></td>

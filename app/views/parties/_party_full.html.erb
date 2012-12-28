@@ -74,25 +74,8 @@
 	<hr>
 	
 	<p class="muted">
-		<%= link_to "Buy ticket", "#", 
-			class: "btn btn-primary disabled", 
-			rel: "tooltip", 
-			"title" => "Work in progress..." %>	
-		<% if current_user %>
-			<% if object.going.include?(current_user.id) %>
-				<button id="join_button_<%= @party.id %>" class="btn btn-success disabled join-button">Going</button>
-			<% elsif object.date >= (Date.current() - 8.hour).to_date %>
-				<%= link_to "Join", 
-					"#{parties_join_path}?party=#{object.id}", 
-					class: "btn btn-success join-button join_button_#{@party.id}",remote: true %>
-			<% else %>
-				<button id="join_button_<%= @party.id %>" class="btn btn-success disabled join-button">Join</button>
-			<% end -%>
-		<% else %>
-			<a id="join_button_<%= @party.id %>" class="btn btn-success join-button disabled"
-				rel="tooltip" title="Sign in to join">Join</a>
-		<% end -%>
-		<span class="going_counter_<%= @party.id %>"><%= pluralize object.going.count, "person" %></span> going
+		<%= render 'shared/buy_button', object: object %>
+		<%= render 'shared/join_button', object: object %>
 	</p>
 
 	<hr class="bs-dosc-separator">
@@ -180,7 +163,7 @@
 		<% end %>	
 	</div>
 
-	<div class="form">
+	<div class="form" style="<%= "margin-top:20px" unless object.comments.count > 0 %>">
 		<% if current_user %>
 			<%= render 'comments/form', object: object %>
 		<% else %>

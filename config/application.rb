@@ -66,6 +66,9 @@ module Komanda
     config.assets.version = '1.0'
     
     # Heroku requires this to be false
-config.assets.initialize_on_precompile=false
+    config.assets.initialize_on_precompile=false
+    
+    # Logs filtering
+    config.filter_parameters << :card_number << :card_verification
   end
 end

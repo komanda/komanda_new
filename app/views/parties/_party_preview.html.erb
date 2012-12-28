@@ -25,25 +25,13 @@
 					</p>
 					<%= raw object.description %>
 					<div class="buttons">
-						<%= link_to "Buy ticket", "#", class: "btn btn-primary disabled", 
-							rel: "tooltip", "title" => "Work in progress..." %>	
-
-						<% if current_user %>
-							<% if object.going.include?(current_user.id) %>
-								<a href="#" class="btn btn-success disabled">Going</a>
-							<% else %>
-								<%= link_to "Join", 
-									"#{parties_join_path}?party=#{object.id}", 
-									class: "btn btn-success join_button_#{object.id}", remote: true %>
-							<% end -%>
-						<% else %>
-							<a href="#" class="btn btn-success disabled" rel="tooltip" title="Sign in to join">Join</a>
-						<% end -%>
-						<span class="muted">
-							<span class="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> 
-							going</span>
+						<%= render 'shared/buy_button', object: object %>
+						
+						<%= render 'shared/join_button', object: object %>
 					
-							<%= link_to pluralize(object.comments.count, "comment"), "#{party_path(object)}#comments", class: "pull-right" %>
+						<%= link_to pluralize(object.comments.count, "comment"), 
+							"#{party_path(object)}#comments", 
+							class: "pull-right" %>
 					</div>
 				</div>
 			</div>
@@ -56,20 +44,11 @@
 		<%= link_to (image_tag object.flyer), object %>	
 	</div>
 	<p>
-	<% if current_user %>
-		<% if object.going.include?(current_user.id) %>
-			<a href="#" class="btn btn-success btn-mini disabled">Going</a>
-		<% else %>
-			<%= link_to "Join", 
-				"#{parties_join_path}?party=#{object.id}", 
-				class: "btn btn-success btn-mini join_button_#{object.id}", remote: true %>
-		<% end -%>
-	<% else %>
-		<a href="#" class="btn btn-success disabled btn-mini" rel="tooltip" title="Sign in to join">Join</a>
-	<% end -%>
-	
-	<small class="muted"><span class="going_counter_<%= object.id %>"><%= pluralize object.going.count, "person" %></span> 
-	going</small>
+		<span class="muted">
+			<span class="going_counter_<%= object.id %>">
+				<%= pluralize object.going.count, "person" %>
+			</span> going
+		</span>
 	</p>
 	<p>
 		<%= link_to object, class: "btn btn-mini" do %>

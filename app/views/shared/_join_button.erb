@@ -1,0 +1,20 @@
+<% if object.date >= (Date.current() - 8.hour).to_date %>
+	<% if current_user %>
+		<% if object.going.include?(current_user.id) %>
+			<a class="btn btn-success disabled">Going</a>
+		<% else %>
+			<%= link_to "Join", 
+				"#{parties_join_path}?party=#{object.id}", 
+				class: "btn btn-success join_button_#{object.id}", remote: true %>
+		<% end %>
+	<% else %>
+		<%= link_to "Join", 
+			signin_path, 
+			class: "btn btn-success" %>
+	<% end %>
+<% end %>
+<span class="muted">
+	<span class="going_counter_<%= object.id %>">
+		<%= pluralize object.going.count, "person" %>
+	</span> going
+</span>

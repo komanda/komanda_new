@@ -9,4 +9,7 @@ class StaticPagesController < ApplicationController
   	@events = Party.all.desc(:when)
   	@suggestions = Suggestion.all.desc(:created_at)
   end
+  
+  def signin
+  end
 end

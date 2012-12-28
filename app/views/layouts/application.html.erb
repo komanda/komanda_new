@@ -397,6 +397,15 @@
 		function add_datepicker() {
 			$(".date-picker").datepicker({ dateFormat: "yy-mm-dd", minDate: new Date(), maxDate: "+1y" })
 		}
+		
+		/* fot order form */
+		fix_quantity_change()
+		function fix_quantity_change() {
+			$("#order_quantity").change(function() {
+				$("#quantity").text(this.value)
+				$("#total").text("$" + (parseFloat($("#price").attr("price")) * parseInt($("#quantity").text())).toFixed(2))
+			})
+		}
 	</script>
   </body>
 </html>

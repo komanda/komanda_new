@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+	<tr>
+		<th>Name</th>
+		<td>
+			<%= order.first_name %> <%= order.last_name %>
+		</td>
+	</tr>
+	<tr>
+		<th>Order ID</th>
+		<td><%= order.id %></td>
+	</tr>
+	<tr>
+		<th>Transaction ID</th>
+		<td><%= order.transactions.last.id %></td>
+	</tr>
+
+	<tr>
+		<th>Price</th>
+		<td><%= number_to_currency order.price %></td>
+	</tr>
+
+	<tr>
+		<th>Quantity</th>
+		<td><%= order.quantity %></td>
+	</tr>
+
+	<tr class="info">
+		<th>Total</th>
+		<td><%= number_to_currency order.transactions.last.amount/100 %></td>
+	</tr>
+</table>

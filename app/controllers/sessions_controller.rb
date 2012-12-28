@@ -4,20 +4,11 @@ class SessionsController < ApplicationController
     @user = User.find_by(provider: auth["provider"], uid: auth["uid"]) || User.create_with_omniauth(auth)
     @user.update_attribute(:img_url, auth["info"]["image"]) unless (@user.name == "Komanda" && @user.admin)
     session[:user_id] = @user.id
-    
-    if request.env["HTTP_REFERER"]
-      redirect_to :back
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
   
   def destroy
-    session[:user_id] = nil
-    
-    respond_to do |format|
-      format.html { redirect_to :back || root_path }
-      format.js
-    end
+    session[:user_id] = nil    
+    redirect_to root_path
   end
 end
