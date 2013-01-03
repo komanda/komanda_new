@@ -18,11 +18,11 @@
 		</tr>
 		<tr>
 			<th>Quantity</th>
-			<td id="quantity">1</td>
+			<td id="quantity"><%= @order.quantity %></td>
 		</tr>
 		<tr class="info">
 			<th>Total</th>
-			<td id="total"><%= number_to_currency @order.price %></td>
+			<td id="total"><%= number_to_currency @order.price * @order.quantity %></td>
 		</tr>
 	</table>
 	
