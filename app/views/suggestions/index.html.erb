@@ -15,10 +15,7 @@
 					<%= link_to "Suggest an event", new_suggestion_path, class: "btn btn-primary btn-large visible-phone" %>
 				<% end -%>
 			<% else %>
-				<a rel="tooltip" data-placement="bottom" title="Sign in to suggest" 
-					class="btn btn-primary btn-large visible-phone disabled">Suggest an event</a>
-				<a rel="tooltip" data-placement="bottom" title="Sign in to suggest" 
-					class="btn btn-primary btn-large hidden-phone disabled">Suggest an event</a>
+				<%= link_to "Suggest an event", signin_path, class: "btn btn-primary btn-large" %>
 			<% end -%>
 		</p>
 

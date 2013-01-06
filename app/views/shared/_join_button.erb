@@ -1,4 +1,5 @@
-<% if object.date >= (Date.current() - 8.hour).to_date %>
+<% upcoming_event = object.date >= (Date.current() - 8.hour).to_date %>
+<% if upcoming_event %>
 	<% if current_user %>
 		<% if object.going.include?(current_user.id) %>
 			<a class="btn btn-success disabled">Going</a>
@@ -16,5 +17,5 @@
 <span class="muted">
 	<span class="going_counter_<%= object.id %>">
 		<%= pluralize object.going.count, "person" %>
-	</span> going
+	</span> <%= upcoming_event ? "going" : "went" %>
 </span>

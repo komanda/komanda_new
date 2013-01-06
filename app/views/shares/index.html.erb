@@ -20,10 +20,7 @@
 					<%= render 'form' %>
 				<% end -%>
 			<% else %>
-				<a rel="tooltip" data-placement="bottom" title="Sign in to share" 
-					class="btn btn-primary btn-large visible-phone disabled">Share an event</a>
-				<a rel="tooltip" data-placement="bottom" title="Sign in to share" 
-					class="btn btn-primary btn-large hidden-phone disabled">Share an event</a>
+				<%= link_to "Share an event", signin_path, class: "btn btn-primary btn-large" %>
 			<% end -%>
 		</p>
 		
