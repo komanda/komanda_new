@@ -16,9 +16,9 @@
 
 	<div class="media-body">
 		<div class="media-heading">
-		<%= link_to object[1].user.name, object[1].user.profile_url, target: "_blank" %>
-		<small class="muted"><%= time_ago_in_words(object[1].created_at) %> ago</small>
-	</div>
-	<%= object[1].content %>
+			<%= link_to object[1].user.name, object[1].user.profile_url, target: "_blank" %>
+			<small class="muted"><%= time_ago_in_words(object[1].created_at) %> ago</small>
+		</div>
+		<%= object[1].content %>
 	</div>
 </article>
